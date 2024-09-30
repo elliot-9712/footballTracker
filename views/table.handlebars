@@ -1,0 +1,36 @@
+    <h1>Teams</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Position</th>
+                <th>Club</th>
+                <th>Played</th>
+                <th>Won</th>
+                <th>Drawn</th>
+                <th>Lost</th>
+                <th>Goals Scored</th>
+                <th>Goals Conceded</th>
+                <th>Goal Difference</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each teams}}
+            <tr>
+                <td>{{this.id}}</td>
+            <td>
+                <img src="{{this.image}}" alt="{{this.name}}" style="width: 25px; height: auto; margin-right: 8px; vertical-align: middle;">
+                {{this.name}}
+            </td>
+                <td>{{this.games}}</td>
+                <td>{{this.wins}}</td>
+                <td>{{this.draws}}</td>
+                <td>{{this.losses}}</td>
+                <td>{{this.goals_scored}}</td>
+                <td>{{this.goals_conceded}}</td>
+                <td>{{this.goal_difference}}</td>
+                <td>{{this.points}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>

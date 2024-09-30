@@ -1,0 +1,24 @@
+    <link rel="stylesheet" href="css/style.css">
+
+<body>
+    <div class="login-container">
+        <h1>Welcome to Premier League Tracker</h1>
+        <h2>Please log in to continue</h2>
+        <form action="/login" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" name="username" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
+            
+            <button type="submit">Login</button>
+        </form>
+        {{#if error}}
+            <div>{{error}}</div>
+        {{/if}}
+        {{#if message}}
+            <div>{{message}}</div>
+        {{/if}}
+        <p>Don't have an account? <a href="/register">Register here</a></p>
+    </div>
+</body>

@@ -1,0 +1,37 @@
+<h1>Schedule</h1>
+
+<!-- Dropdown to select game week -->
+<form action="/schedule" method="GET">
+    <label for="game_week">Select Game Week:</label>
+    <select id="game_week" name="game_week" onchange="this.form.submit()">
+        {{#each gameWeeks}}
+            <option value="{{this.game_week}}" {{#if (eq this.game_week ../selectedGameWeek)}}selected{{/if}}>
+                Game Week {{this.game_week}}
+            </option>
+        {{/each}}
+    </select>
+</form>
+
+<!-- Display matches for the selected game week -->
+<h2>Matches for Game Week {{selectedGameWeek}}</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Home Team</th>
+            <th>Away Team</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each matches}}
+            <tr>
+                <td>{{this.date}}</td>
+                <td>{{this.home_team_name}}</td>
+                <td>{{this.away_team_name}}</td>
+                <td>{{this.home_team_goals}} - {{this.away_team_goals}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
