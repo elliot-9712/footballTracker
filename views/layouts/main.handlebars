@@ -11,20 +11,17 @@
     <nav>
         <p id="logo">Premier League Tracker</p>
         <ul class="nav-links">
-            <li><a href="/home">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="/table">Table</a></li>
             <li><a href="/schedule">Schedule</a></li>
             <li><a href="/contact">Contact</a></li>
             <li><a href="/about">About</a></li>
         </ul>
         <ul class="nav-login">
-            {{#if session.user}}
-                <li class="username-container">
-                    <p class="username">{{session.user.username}}</p>
-                    <a href="/logout" class="logout-button">Logout</a>
-                </li>
+            {{#if session.isLoggedIn}}
+                <li class="username-container">Hi, {{session.name}} - <a href="/logout"> Logout</a></li>
             {{else}}
-                <li><a href="/">Login</a></li>
+                <li><a href="/login">Login</a></li>
             {{/if}}
         </ul>
     </nav>

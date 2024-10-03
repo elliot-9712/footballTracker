@@ -1,7 +1,7 @@
 const adminName = 'admin'
-const adminPassword = '123'
+//const adminPassword = '123'
+const adminPassword='$2a$14$RZMnY0kVoepU8ydg/b9OKuZXXeR42u/j/vA1P/u9diGqyVFPMRFWC'
 
-//$2a$14$r6ZPpA9w5mKeQdcEP0lC4.DNPG/uYw8T2a6Igwpi0Dknx.fBvUIiq
 
 
 const express = require('express');
@@ -10,7 +10,22 @@ const sqlite3 = require('sqlite3');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const db = require('./models/db'); // Import the database connection
+const connectSqlite3 = require('connect-sqlite3');
+
+const SQLiteStore = connectSqlite3(session)
+
 const bcrypt = require('bcryptjs');
+const saltRounds = 14
+
+// run this code ONLY ONCE!
+// bcrypt.hash(adminPassword, saltRounds, function(err, hash) {
+//     if (err) {
+//         console.log("---> Error encrypting the password: ", err)
+//     } else {
+//         console.log("---> Hashed password (Generate only ONCE): ", hash)
+//     }
+// })
+
 
 // Create the server app
 const app = express();
@@ -37,53 +52,121 @@ app.use(express.static('public'));
 
 // Configure express-session
 app.use(session({
-    secret: 'secret',
-    resave: true,
-    saveUninitialized: true
-}));
+    store: new SQLiteStore({db: "session-db.db"}),
+    "saveUninitialized": false,
+    "resave": false,
+    "secret": "This123Is@Another#456GreatSecret678%Sentence",
+    // cookie: {
+    //     sameSite: 'strict',
+    //     httpOnly: true,
+    //     secure: true
+    // }
+}))
 
 // Global middleware for user session
-app.use((req, res, next) => {
+app.use(function (req, res, next) {
+    console.log("Session passed to response locals...")
     res.locals.session = req.session;
     next();
-});
+})
+
 
 // Call the function to create tables
 require('./models/db'); // This will execute the table creation code
 
 app.post('/register', async (req, res) => {
-    const { username, password } = req.body;
-    const hash = await bcrypt.hash(password, 14);
+    const username = req.body.username;
+    const password = req.body.password;
 
-    db.run('INSERT INTO users (username, password) VALUES (?, ?)', [username, hash], (err) => {
-        if (err) {
-            res.status(500).send('Server Error');
-        } else {
-            res.redirect('/login');
-        }
+    // Ensure that admin cannot be registered as a user
+    if (username === adminName) {
+        return res.status(400).send('Cannot register as admin');
+    }
+
+    const hash = await bcrypt.hash(password, saltRounds);
+
+    db.serialize(() => {
+        db.run('INSERT INTO users (username, password) VALUES (?, ?)', [username, hash], (err) => {
+            if (err) {
+                res.status(500).send('Server Error');
+                console.log(err);
+            } else {
+                res.redirect('/login');
+            }
+        });
     });
 });
 
+app.get('/logout', (req, res) => {
+    req.session.destroy( (err) => {
+        if (err) {
+            console.log("Error while destroying the session: ", err)
+        } else {
+            console.log('Logged out...')
+            res.redirect('/')
+        }
+    })
+})
+
 // Login logic
-app.post('/login', async (req, res) => {
-    const { username, password } = req.body;
+app.post('/login', (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
 
     if (!username || !password) {
-        model={ error: "Username and password are required.", message: ""}
-        return res.status(400).render('login.handlebars', model)
+        const model = { error: "Username and password are required.", message: "", layout: false };
+        return res.status(400).render('login.handlebars', model);
     }
-    if (username==adminName) {
-        console.log('The username is the admin one!')
-        if (password==adminPassword) {
-            const model={ error: "", message: "You are the admin. Welcome home!" }
-            res.render('login.handlebars', model)
-        } else {
-            res.send(`<div>Sorry, the password is not correct...<br />
-            Please, try again: <a href="login">Login</a></div>`)
-        }
+
+    // Check if the user is the admin
+    if (username === adminName) {
+        // Admin login flow
+        bcrypt.compare(password, adminPassword, (err, result) => {
+            if (err) {
+                const model = { error: "Error while comparing passwords: " + err, message: "", layout: false };
+                return res.render('login.handlebars', model);
+            }
+
+            if (result) {
+                // Admin authenticated successfully
+                req.session.isAdmin = true;
+                req.session.isLoggedIn = true;
+                req.session.name = username;
+                console.log("Admin logged in. Session information: " + JSON.stringify(req.session));
+                return res.redirect("/"); 
+            } else {
+                const model = { error: "Sorry, the password is incorrect", message: "", layout: false };
+                return res.status(400).render('login.handlebars', model);
+            }
+        });
     } else {
-        res.send(`<div>Sorry, the username ${username} is not correct... <br />
-            Please, try again: <a href="/login">Login</a><div>`)
+        // Regular user login flow
+        db.get('SELECT * FROM users WHERE username = ?', [username], (err, row) => {
+            if (err) {
+                return res.status(500).send('Server Error');
+            }
+            if (!row) {
+                const model = { error: "Sorry, the username does not exist.", message: "", layout: false };
+                return res.status(400).render('login.handlebars', model);
+            }
+
+            bcrypt.compare(password, row.password, (err, result) => {
+                if (err) {
+                    return res.status(500).send('Error while comparing passwords.');
+                }
+
+                if (result) {
+                    // User authenticated successfully
+                    req.session.isLoggedIn = true;
+                    req.session.name = username;
+                    req.session.isAdmin = false;
+                    return res.redirect("/");  // Redirect to the user homepage
+                } else {
+                    const model = { error: "Sorry, the password is incorrect", message: "", layout: false };
+                    return res.status(400).render('login.handlebars', model);
+                }
+            });
+        });
     }
 });
         
@@ -111,12 +194,14 @@ app.use((req, res, next) => {
 })
 
 // Define routes
-app.get('/', (req, res) => {
-    res.render('login.handlebars', { layout: false });
-});
-
-app.get('/home', (req, res) => {
-    res.render('home.handlebars', { user: req.session.user });
+app.get('/', function (req, res) {
+    const model={
+        isLoggedIn: req.session.isLoggedIn,
+        name: req.session.name,
+        isAdmin: req.session.isAdmin
+    }
+    console.log("---> Home model: "+JSON.stringify(model))
+    res.render('home.handlebars', model)
 });
 
 app.get('/table', (req, res) => {
@@ -168,7 +253,6 @@ app.get('/schedule', (req, res) => {
         });
     });
 });
-
 
 
 app.get('/about', (req, res) => {
