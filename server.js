@@ -231,21 +231,59 @@ app.get('/users', (req, res) => {
 
 app.get('/profile/:username', (req, res) => {
     const username = req.params.username;
+    console.log('Requested username:', username);
 
-    db.get('SELECT * FROM users WHERE username = ?', [username], (err, user) => {
+    db.get(`
+        SELECT 
+            users.id AS user_id, 
+            users.username,
+            users.team AS team_id,
+            teams.name AS team_name 
+        FROM 
+            users 
+        INNER JOIN 
+            teams 
+        ON 
+            users.team = teams.id 
+        WHERE 
+            users.username = ?`, [username], (err, user) => {
         if (err) {
             return res.status(500).send('Server Error');
         }
         if (!user) {
+            console.log('User not found in the database.'); // Log if user is not found
             return res.status(404).send('User not found');
         }
 
-        const model = { 
-            user,
-            title: `${user.username}'s Profile` // Pass the title to the layout
-        };
+        db.all(`SELECT id, name FROM teams ORDER BY id`, [], (err, teams) => {
+            if (err) {
+                return res.status(500).send('Server Error');
+            }
 
-        res.render('profile', model); // Renders the profile.handlebars using the main layout
+            const model = {
+                layout: false,
+                user,
+                teams,  // Pass all teams to the template
+                title: `${user.username}'s Profile`
+            };
+
+        res.render('profile.handlebars', model); // Renders the profile.handlebars using the main layout
+    });
+});
+})
+
+app.post('/profile/:username/update', (req, res) => {
+    const username = req.params.username;                 // Get the username from the URL
+    const newTeamId = req.body.team;                      // Get the selected team ID from the form
+
+    // Update the user's team in the database
+    db.run(`UPDATE users SET team = ? WHERE username = ?`, [newTeamId, username], function(err) {
+        if (err) {
+            return res.status(500).send('Server Error');
+        }
+
+        // Redirect back to the user's profile after updating
+        res.redirect(`/profile/${username}`);           
     });
 });
 

@@ -1,7 +1,22 @@
 <body>
-    <h1>Welcome to {{users.username}}'s Profile!</h1>
-    <p>{{users.username}}'s favorit team</p>
-    <p>Team Name: {{#if users.team_name}}{{users.team_name}}
-        {{else}}No team assigned{{/if}}</p>
+    <h1>Welcome to {{user.username}}'s Profile!</h1>
+    <p>{{user.username}}'s favorite team</p>
+    
+    <!-- Display the current team -->
+    <p>Team Name: {{#if user.team_name}}
+        {{user.team_name}}
+    {{else}}No team assigned{{/if}}</p>
+    
+    <!-- Team Selection Form -->
+    <form action="/profile/{{user.username}}/update" method="POST">
+        <label for="team">Select a new team:</label>
+        <select name="team" id="team">
+            {{#each teams}}
+                <option value="{{this.id}}" {{#if (eq this.id ../user.current_team_id)}}selected{{/if}}>{{this.name}}</option>
+            {{/each}}
+        </select>
+        <button type="submit">Update Team</button>
+    </form>
+
     <a href="/">Back to Home</a>
 </body>
