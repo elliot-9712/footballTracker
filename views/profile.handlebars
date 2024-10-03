@@ -4,6 +4,7 @@
     
     <!-- Display the current team -->
     <p>Team Name: {{#if user.team_name}}
+        <img src="{{user.team_image}}" alt="{{user.team_name}}" style="width: 25px; height: auto; margin-right: 2px; vertical-align: middle;">
         {{user.team_name}}
     {{else}}No team assigned{{/if}}</p>
     

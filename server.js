@@ -208,7 +208,7 @@ app.get('/users', (req, res) => {
     db.all(`
     SELECT 
         users.id AS user_id, 
-        users.username,   -- Assuming 'name' is the column you want to display
+        users.username,
         teams.name AS team_name,
         teams.image AS team_image 
     FROM 
@@ -223,11 +223,48 @@ app.get('/users', (req, res) => {
             return res.status(500).send("An error occurred while fetching users.");
         }
 
+        db.all(`SELECT id, name FROM teams ORDER BY id`, [], (err, teams) => {
+            if (err) {
+                return res.status(500).send("An error occurred while fetching teams.");
+            }
+
         console.log("Fetched rows:", rows); // Log the fetched rows for debugging
         // Now rows is defined in this scope
-        res.render('users.handlebars', { users: rows });
+        res.render('users.handlebars', { users: rows, teams: teams });
     });
 });
+})
+
+
+app.post('/change-team/:userId', (req, res) => {
+    const userId = req.params.userId;
+    const newTeamId = req.body.team; // The selected team ID from the dropdown
+
+    // Update the user's team in the database
+    db.run(`UPDATE users SET team = ? WHERE id = ?`, [newTeamId, userId], function(err) {
+        if (err) {
+            return res.status(500).send('An error occurred while updating the team.');
+        }
+
+        // Redirect back to the /users page after updating the team
+        res.redirect('/users');
+    });
+});
+
+app.post('/delete-user/:user_id', (req, res) => {
+    const userId = req.params.user_id;
+
+    // Delete the user from the database
+    db.run(`DELETE FROM users WHERE id = ?`, [userId], function(err) {
+        if (err) {
+            return res.status(500).send('Server Error');
+        }
+
+        // Redirect back to the users list after deleting
+        res.redirect('/users');
+    });
+});
+
 
 app.get('/profile/:username', (req, res) => {
     const username = req.params.username;
@@ -238,10 +275,11 @@ app.get('/profile/:username', (req, res) => {
             users.id AS user_id, 
             users.username,
             users.team AS team_id,
-            teams.name AS team_name 
+            teams.name AS team_name, 
+            teams.image AS team_image 
         FROM 
             users 
-        INNER JOIN 
+        LEFT JOIN 
             teams 
         ON 
             users.team = teams.id 

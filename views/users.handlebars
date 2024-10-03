@@ -6,6 +6,8 @@
                 <th>User ID</th>
                 <th>Username</th>
                 <th>Team Name</th>
+                <th>Change Team</th>
+                <th>Delete User</th>
             </tr>
         </thead>
         <tbody>
@@ -17,6 +19,21 @@
                 <img src="{{this.team_image}}" alt="{{this.team_name}}" style="width: 25px; height: auto; margin-right: 8px; vertical-align: middle;">
                 {{this.team_name}}
             </td>
+            <td>
+            <form action="/change-team/{{this.user_id}}" method="POST">
+                <select name="team" id="team">
+                    {{#each ../teams}}
+                        <option value="{{this.id}}" {{#if (eq this.id ../this.team_id)}}selected{{/if}}>{{this.name}}</option>
+                    {{/each}}
+                </select>
+                <button type="submit">Change</button>
+            </form>
+            </td>
+            <td>
+                        <form action="/delete-user/{{this.user_id}}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                            <button type="submit" style="color: red;">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             {{else}}
                 <tr>
