@@ -1,0 +1,28 @@
+<body>
+    <h1>Users List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Team Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each users}}
+                <tr>
+                    <td>{{this.user_id}}</td>
+                    <td>{{this.username}}</td>
+            <td>
+                <img src="{{this.team_image}}" alt="{{this.team_name}}" style="width: 25px; height: auto; margin-right: 8px; vertical-align: middle;">
+                {{this.team_name}}
+            </td>
+                </tr>
+            {{else}}
+                <tr>
+                    <td colspan="4">No users found.</td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</body>

@@ -204,6 +204,51 @@ app.get('/', function (req, res) {
     res.render('home.handlebars', model)
 });
 
+app.get('/users', (req, res) => {
+    db.all(`
+    SELECT 
+        users.id AS user_id, 
+        users.username,   -- Assuming 'name' is the column you want to display
+        teams.name AS team_name,
+        teams.image AS team_image 
+    FROM 
+        users 
+    INNER JOIN 
+        teams 
+    ON 
+        users.team = teams.id;
+    `, [], (err, rows) => {  // Add the callback function here
+        if (err) {
+            // Handle the error and send an error response
+            return res.status(500).send("An error occurred while fetching users.");
+        }
+
+        console.log("Fetched rows:", rows); // Log the fetched rows for debugging
+        // Now rows is defined in this scope
+        res.render('users.handlebars', { users: rows });
+    });
+});
+
+app.get('/profile/:username', (req, res) => {
+    const username = req.params.username;
+
+    db.get('SELECT * FROM users WHERE username = ?', [username], (err, user) => {
+        if (err) {
+            return res.status(500).send('Server Error');
+        }
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        const model = { 
+            user,
+            title: `${user.username}'s Profile` // Pass the title to the layout
+        };
+
+        res.render('profile', model); // Renders the profile.handlebars using the main layout
+    });
+});
+
 app.get('/table', (req, res) => {
     // Query the teams table
     const query = "SELECT * FROM teams";

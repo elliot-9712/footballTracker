@@ -1,0 +1,7 @@
+<body>
+    <h1>Welcome to {{users.username}}'s Profile!</h1>
+    <p>{{users.username}}'s favorit team</p>
+    <p>Team Name: {{#if users.team_name}}{{users.team_name}}
+        {{else}}No team assigned{{/if}}</p>
+    <a href="/">Back to Home</a>
+</body>
