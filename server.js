@@ -351,27 +351,40 @@ app.get('/schedule', (req, res) => {
 
         // Fetch matches for the selected game week
         db.all(`
-            SELECT m.*, 
-                   t1.name AS home_team_name, 
-                   t2.name AS away_team_name 
-            FROM matches m
-            JOIN teams t1 ON m.home_team_id = t1.id
-            JOIN teams t2 ON m.away_team_id = t2.id
-            WHERE m.game_week = ?
-            ORDER BY m.date
-        `, [selectedGameWeek], (err, matches) => {
-            if (err) {
-                console.error(err.message);
-                return res.status(500).send('Internal server error');
-            }
-
-            // Render the calendar view with game week options and matches
-            res.render('schedule', {
-                gameWeeks: gameWeeks,         // List of game weeks for dropdown
-                matches: matches,             // Matches for the selected game week
-                selectedGameWeek: selectedGameWeek // Track the current game week
-            });
+        SELECT 
+            m.id AS match_id, 
+            m.date,
+            t1.name AS home_team_name, 
+            t1.image AS home_team_image, 
+            t2.name AS away_team_name, 
+            t2.image AS away_team_image, 
+            m.home_team_goals, 
+            m.away_team_goals 
+        FROM 
+            matches m
+        JOIN 
+            teams t1 ON m.home_team_id = t1.id
+        JOIN 
+            teams t2 ON m.away_team_id = t2.id
+        WHERE 
+            m.game_week = ?
+        ORDER BY 
+            m.date
+    `, [selectedGameWeek], (err, matches) => {
+        if (err) {
+            console.error(err.message);
+            return res.status(500).send("An error occurred while fetching matches.");
+        }
+    
+        // Log matches for debugging
+        console.log("Fetched matches:", matches);
+    
+        // Now render the view with the fetched matches data
+        res.render('schedule', {
+            matches: matches,             // Matches for the selected game week
+            selectedGameWeek: selectedGameWeek // Track the current game week
         });
+    });
     });
 });
 

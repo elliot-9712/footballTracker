@@ -4,7 +4,7 @@ const db = new sqlite3.Database(dbFile);
 
 // Team data array
 const teams = [
-    { name: 'Manchester City', image: '/images/manchester-city.png', games: 38, wins: 28, draws: 7, losses: 3, goals_scored: 96, goals_conceded: 34, goal_difference: 62, points: 91 },
+    { name: 'Manchester City', image: '/images/Manchester_City_FC.png', games: 38, wins: 28, draws: 7, losses: 3, goals_scored: 96, goals_conceded: 34, goal_difference: 62, points: 91 },
     { name: 'Arsenal', image: '/images/arsenal.png', games: 38, wins: 28, draws: 5, losses: 5, goals_scored: 91, goals_conceded: 29, goal_difference: 62, points: 89 },
     { name: 'Liverpool', image: '/images/liverpool.png', games: 38, wins: 24, draws: 10, losses: 4, goals_scored: 86, goals_conceded: 41, goal_difference: 45, points: 82 },
     { name: 'Aston Villa', image: '/images/aston-villa.png', games: 38, wins: 20, draws: 8, losses: 10, goals_scored: 76, goals_conceded: 61, goal_difference: 15, points: 68 },
@@ -19,7 +19,7 @@ const teams = [
     { name: 'Fulham', image: '/images/fulham.png', games: 38, wins: 13, draws: 8, losses: 17, goals_scored: 55, goals_conceded: 61, goal_difference: -6, points: 47 },
     { name: 'Wolves', image: '/images/wolves.png', games: 38, wins: 13, draws: 7, losses: 18, goals_scored: 50, goals_conceded: 65, goal_difference: -15, points: 46 },
     { name: 'Everton', image: '/images/everton.png', games: 38, wins: 13, draws: 9, losses: 16, goals_scored: 40, goals_conceded: 51, goal_difference: -11, points: 40 },
-    { name: 'Brentford', image: '/images/brentford.png', games: 38, wins: 10, draws: 9, losses: 19, goals_scored: 56, goals_conceded: 65, goal_difference: -9, points: 39 },
+    { name: 'Brentford', image: '/images/Brentford_FC.png', games: 38, wins: 10, draws: 9, losses: 19, goals_scored: 56, goals_conceded: 65, goal_difference: -9, points: 39 },
     { name: 'Nottingham Forest', image: '/images/nottingham.png', games: 38, wins: 9, draws: 9, losses: 20, goals_scored: 49, goals_conceded: 67, goal_difference: -18, points: 32 },
     { name: 'Luton', image: '/images/luton-town.png', games: 38, wins: 6, draws: 8, losses: 24, goals_scored: 52, goals_conceded: 85, goal_difference: -33, points: 26 },
     { name: 'Burnley', image: '/images/burnley.png', games: 38, wins: 5, draws: 9, losses: 24, goals_scored: 41, goals_conceded: 78, goal_difference: -37, points: 24 },

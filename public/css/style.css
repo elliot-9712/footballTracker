@@ -127,32 +127,107 @@ table {
     border-collapse: collapse;
     margin: 20px 0;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
+  }
 
-thead {
+  thead {
     background-color: #007BFF;
     color: #ffffff;
-}
+  }
 
-th, td {
+  th, td {
     padding: 12px;
     text-align: center;
     border: 1px solid #dddddd;
-}
+  }
 
-tbody tr:nth-child(even) {
+  tbody tr:nth-child(even) {
     background-color: #f9f9f9;
-}
+  }
 
-tbody tr:hover {
+  tbody tr:hover {
     background-color: #e7f1ff;
-}
+  }
 
-th {
+  th {
     font-weight: bold;
     font-size: 16px;
+  }
+
+  td {
+    font-size: 14px;
+  }
+
+img {
+    width: 40px;  /* Fixed width */
+    height: 40px; /* Fixed height */
+    object-fit: contain;  /* Maintain aspect ratio, fit within the container */
+    margin-right: 8px;
+    vertical-align: middle;
+    display: inline-block;
+  }
+
+
+/* Pagination code from "Maketechstuff" - https://www.maketechstuff.com/2023/08/dynamic-pagination-in-javascript-step.html */
+.box {
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 100px;
+    box-shadow: 0px 10px 30px -15px #000;
+    display: flex;
+    align-items: center;
 }
 
-td {
-    font-size: 14px;
+.box ul {
+    display: flex;
+    margin: 0px 10px;
+}
+
+.box ul li {
+    list-style: none;
+    margin: 0px 5xp;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 100px;
+    text-align: center;
+}
+
+.box ul li a {
+
+    font-size: 2 rem;
+    text-decoration: none;
+    color: #000;
+    display: block;
+    border-radius: 100px;
+    transition: 0.2s;
+}
+
+.box ul li .active_page {
+    background-color: #0056b3;
+    color: #ffffff;
+}
+
+.box ul li a:hover,
+.box button a:hover {
+    background-color: #0056b3;
+    color: #ffffff;
+}
+
+/* Buttons */
+.box button {
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #f1f1f1;
+    border: none;
+    cursor: pointer;
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+.box button a {
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+    color: #000;
+    transform: 0.2s;
 }

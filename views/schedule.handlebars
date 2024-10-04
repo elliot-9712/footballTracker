@@ -1,18 +1,4 @@
 <h1>Schedule</h1>
-
-<!-- Dropdown to select game week -->
-<form action="/schedule" method="GET">
-    <label for="game_week">Select Game Week:</label>
-    <select id="game_week" name="game_week" onchange="this.form.submit()">
-        {{#each gameWeeks}}
-            <option value="{{this.game_week}}" {{#if (eq this.game_week ../selectedGameWeek)}}selected{{/if}}>
-                Game Week {{this.game_week}}
-            </option>
-        {{/each}}
-    </select>
-</form>
-
-<!-- Display matches for the selected game week -->
 <h2>Matches for Game Week {{selectedGameWeek}}</h2>
 
 <table border="1">
@@ -28,10 +14,90 @@
         {{#each matches}}
             <tr>
                 <td>{{this.date}}</td>
-                <td>{{this.home_team_name}}</td>
-                <td>{{this.away_team_name}}</td>
+                <td>
+                <img src="{{this.home_team_image}}" alt="{{this.home_team_name}}" style="width: 40px; height: 40px; object-fit: contain: margin-right: 8px; vertical-align: middle; display: inline-block;">
+                {{this.home_team_name}}
+            </td>
+            <td>
+                <img src="{{this.away_team_image}}" alt="{{this.away_team_name}}" style="width: 40px; height: 40px; object-fit: contain: margin-right: 8px; vertical-align: middle; display: inline-block;">
+                {{this.away_team_name}}
+            </td>
                 <td>{{this.home_team_goals}} - {{this.away_team_goals}}</td>
             </tr>
         {{/each}}
     </tbody>
 </table>
+
+
+{{!-- Pagination code from "Maketechstuff" - https://www.maketechstuff.com/2023/08/dynamic-pagination-in-javascript-step.html --}}
+
+<div class="box">
+    <button type="button" class="prev"><a href="#">Prev</a></button>
+
+    <ul class="ul">
+    </ul>
+
+    <button type="button" class="next"><a href="#">Next</a></button>
+</div>
+
+<script>
+    const selectedGameWeek = {{selectedGameWeek}}; // Get selected game week from server
+    const totalGameWeeks = 38;
+
+    let ul = document.querySelector(".ul");
+    let prev = document.querySelector(".prev");
+    let next = document.querySelector(".next");
+    let current_page = selectedGameWeek; // Set current_page to selectedGameWeek
+
+    create_pages(current_page);
+
+    function create_pages(current_page) {
+        ul.innerHTML = "";
+
+        let before_page = current_page - 2;
+        let after_page = current_page + 2;
+
+        if (current_page == 2) {
+            before_page = current_page - 1;
+        }
+        if (current_page == 1) {
+            before_page = current_page;
+        }
+
+        if (current_page == totalGameWeeks - 1) {
+            after_page = current_page + 1;
+        }
+        if (current_page == totalGameWeeks) {
+            after_page = current_page;
+        }
+
+        // Create pagination buttons for visible game weeks
+        for (let i = before_page; i <= after_page; i++) {
+            let active_page = current_page == i ? "active_page" : "";
+            ul.innerHTML += `<li onclick="navigateToPage(` + i + `)">
+                                <a href="#" class="page_number ` + active_page + `">` + i + `</a>
+                             </li>`;
+        }
+
+// Next and Previous Button Functionality.
+
+        prev.onclick = function () {
+            current_page--;
+            navigateToPage(current_page);
+        };
+        next.onclick = function () {
+            current_page++;
+            navigateToPage(current_page);
+        };
+
+        prev.style.display = current_page <= 1 ? "none" : "block";
+        next.style.display = current_page >= totalGameWeeks ? "none" : "block";
+    }
+
+    function navigateToPage(page) {
+        // Redirect to the server with the selected game week
+        window.location.href = `/schedule?game_week=${page}`;
+    }
+
+
+</script>
