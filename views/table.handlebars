@@ -1,3 +1,4 @@
+<div class="table-container">
     <h1>Teams</h1>
     <table>
         <thead>
@@ -16,12 +17,14 @@
         </thead>
         <tbody>
             {{#each teams}}
-            <tr>
+            <tr class="position-{{this.id}}">
                 <td>{{this.id}}</td>
-            <td>
-                <img src="{{this.image}}" alt="{{this.name}}" style="width: 40px; height: 40px; object-fit: contain: margin-right: 8px; vertical-align: middle; display: inline-block;">
-                {{this.name}}
-            </td>
+                <td>
+                    <div class="team">
+                        <img src="{{this.image}}" alt="{{this.name}}">
+                        <span>{{this.name}}</span>
+                    </div>
+                </td>
                 <td>{{this.games}}</td>
                 <td>{{this.wins}}</td>
                 <td>{{this.draws}}</td>
@@ -34,3 +37,4 @@
             {{/each}}
         </tbody>
     </table>
+</div>

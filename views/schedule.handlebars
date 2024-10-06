@@ -1,36 +1,41 @@
-<h1>Schedule</h1>
-<h2>Matches for Game Week {{selectedGameWeek}}</h2>
-
-<table border="1">
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Home Team</th>
-            <th>Away Team</th>
-            <th>Result</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each matches}}
+<div class="table-container">
+    <h1>Schedule</h1>
+    <h2>Matches for Game Week {{selectedGameWeek}}</h2>
+    <table border="1">
+        <thead>
             <tr>
-                <td>{{this.date}}</td>
-                <td>
-                <img src="{{this.home_team_image}}" alt="{{this.home_team_name}}" style="width: 40px; height: 40px; object-fit: contain: margin-right: 8px; vertical-align: middle; display: inline-block;">
-                {{this.home_team_name}}
-            </td>
-            <td>
-                <img src="{{this.away_team_image}}" alt="{{this.away_team_name}}" style="width: 40px; height: 40px; object-fit: contain: margin-right: 8px; vertical-align: middle; display: inline-block;">
-                {{this.away_team_name}}
-            </td>
-                <td>{{this.home_team_goals}} - {{this.away_team_goals}}</td>
+                <th>Date</th>
+                <th>Home Team</th>
+                <th>Result</th>
+                <th>Away Team</th>
             </tr>
-        {{/each}}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {{#each matches}}
+                <tr>
+                    <td>{{this.date}}</td>
+                    <td>
+                        <div class="team">
+                            <img src="{{this.home_team_image}}" alt="{{this.home_team_name}}">
+                            <span>{{this.home_team_name}}</span>
+                        </div>
+                    </td>
+                    <td>{{this.home_team_goals}} - {{this.away_team_goals}}</td>
+                    <td>
+                        <div class="team">
+                            <img src="{{this.away_team_image}}" alt="{{this.away_team_name}}">
+                            <span>{{this.away_team_name}}</span>
+                        </div>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
 
 
 {{!-- Pagination code from "Maketechstuff" - https://www.maketechstuff.com/2023/08/dynamic-pagination-in-javascript-step.html --}}
-
+<div class="container">
 <div class="box">
     <button type="button" class="prev"><a href="#">Prev</a></button>
 
@@ -38,6 +43,7 @@
     </ul>
 
     <button type="button" class="next"><a href="#">Next</a></button>
+</div>
 </div>
 
 <script>

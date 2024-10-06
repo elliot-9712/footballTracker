@@ -383,7 +383,7 @@ const matches = [
 { game_week: 30, date: '2024-03-30', home_team_id: 5, away_team_id: 18, home_team_goals: 2, away_team_goals: 1 },
 { game_week: 30, date: '2024-03-30', home_team_id: 6, away_team_id: 19, home_team_goals: 2, away_team_goals: 2 },
 { game_week: 30, date: '2024-03-30', home_team_id: 12, away_team_id: 15, home_team_goals: 2, away_team_goals: 1 },
-{ game_week: 30, date: '2024-03-30', home_team_id: 147, away_team_id: 14, home_team_goals: 2, away_team_goals: 0 },
+{ game_week: 30, date: '2024-03-30', home_team_id: 4, away_team_id: 14, home_team_goals: 2, away_team_goals: 0 },
 { game_week: 30, date: '2024-03-30', home_team_id: 16, away_team_id: 8, home_team_goals: 1, away_team_goals: 1 },
 { game_week: 30, date: '2024-03-31', home_team_id: 3, away_team_id: 11, home_team_goals: 2, away_team_goals: 1 },
 { game_week: 30, date: '2024-03-31', home_team_id: 1, away_team_id: 2, home_team_goals: 0, away_team_goals: 0 },
@@ -530,53 +530,53 @@ const matches = [
           )
       `);
 
-    //   // Insert match data
-    // matches.forEach((match) => {
-    //     db.run(
-    //         `INSERT OR IGNORE INTO matches (game_week, date, home_team_id, away_team_id, home_team_goals, away_team_goals) 
-    //          VALUES (?, ?, ?, ?, ?, ?)`,
-    //         [
-    //             match.game_week,
-    //             match.date,
-    //             match.home_team_id,
-    //             match.away_team_id,
-    //             match.home_team_goals,
-    //             match.away_team_goals
-    //         ],
-    //         (err) => {
-    //             if (err) {
-    //                 console.error(`Error inserting match on ${match.date}:`, err.message);
-    //             } else {
-    //             }
-    //         }
-    //     );
-    // });
+      // Insert match data
+    matches.forEach((match) => {
+        db.run(
+            `INSERT OR IGNORE INTO matches (game_week, date, home_team_id, away_team_id, home_team_goals, away_team_goals) 
+             VALUES (?, ?, ?, ?, ?, ?)`,
+            [
+                match.game_week,
+                match.date,
+                match.home_team_id,
+                match.away_team_id,
+                match.home_team_goals,
+                match.away_team_goals
+            ],
+            (err) => {
+                if (err) {
+                    console.error(`Error inserting match on ${match.date}:`, err.message);
+                } else {
+                }
+            }
+        );
+    });
   
-    //   // Insert initial team data
-    //   teams.forEach((team) => {
-    //       db.run(
-    //           `INSERT OR IGNORE INTO teams (name, image, games, wins, draws, losses, goals_scored, goals_conceded, goal_difference, points) 
-    //           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    //           [
-    //               team.name,
-    //               team.image,
-    //               team.games,
-    //               team.wins,
-    //               team.draws,
-    //               team.losses,
-    //               team.goals_scored,
-    //               team.goals_conceded,
-    //               team.goal_difference,
-    //               team.points
-    //           ],
-    //           (err) => {
-    //               if (err) {
-    //                   console.error(`Error inserting team ${team.name}:`, err.message);
-    //               } else {
-    //               }
-    //           }
-    //       );
-    //   });
+      // Insert initial team data
+      teams.forEach((team) => {
+          db.run(
+              `INSERT OR IGNORE INTO teams (name, image, games, wins, draws, losses, goals_scored, goals_conceded, goal_difference, points) 
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+              [
+                  team.name,
+                  team.image,
+                  team.games,
+                  team.wins,
+                  team.draws,
+                  team.losses,
+                  team.goals_scored,
+                  team.goals_conceded,
+                  team.goal_difference,
+                  team.points
+              ],
+              (err) => {
+                  if (err) {
+                      console.error(`Error inserting team ${team.name}:`, err.message);
+                  } else {
+                  }
+              }
+          );
+      });
   });
   
   module.exports = db;
