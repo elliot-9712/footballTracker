@@ -4,6 +4,14 @@
     padding: 0; /* Reset padding */
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+
 .header {
     display: flex;
     align-items: center; /* Vertically center the items */
@@ -11,18 +19,22 @@
     padding: 10px; /* Add some padding for aesthetics */
 }
 
+nav {
+    width: 100%; /* Ensure nav takes full width */
+    display: flex;
+    justify-content: space-between; /* Keep elements aligned on the left and right */
+    align-items: center; /* Vertically center items */
+}
+
 #logo {
     font-weight: 600;
     font-size: 1.2em;
-    border: 2px solid black;
     padding: 5px;
-    text-align: center;
-}
-
-nav {
-    display: flex;
-    align-items: center; /* Align items vertically in the center */
-    flex-grow: 1; /* Allow nav to grow */
+    border: 2px solid black;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto; /* Automatically center the logo */
 }
 
 .nav-links {
@@ -56,22 +68,6 @@ nav {
     display: flex; /* Use flex to keep username and button inline */
     align-items: center; /* Center vertically */
     position: relative; /* Positioning for the logout button */
-}
-
-.logout-button {
-    display: none; /* Hide the button by default */
-    position: absolute; /* Position it below the username */
-    top: 100%; /* Position below the container */
-    left: 0; /* Align with the left edge */
-    background-color: grey; /* Red background */
-    color: #000; /* White text */
-    padding: 5px 10px;
-    text-decoration: none; /* Remove underline */
-    border-radius: 5px; /* Rounded corners */
-}
-
-.username-container:hover .logout-button {
-    display: block; /* Show on hover */
 }
 
 nav a:hover {
@@ -162,7 +158,8 @@ th:nth-child(4), td:nth-child(4) { /* Away Team */
     width: 150px; /* Adjust as needed for Home and Away teams */
 }
 
-th:nth-child(3), td:nth-child(4) { /* Result */
+th:nth-child(3), td:nth-child(3),
+th:nth-child(5), td:nth-child(5) { /* Result */
     width: 100px; /* Same as Date for uniformity */
 }
 
@@ -180,7 +177,7 @@ th {
 }
 
 td {
-    font-size: 14px;
+    font-size: 12px;
 }
 
 /* Flexbox layout for team logo and name */
@@ -237,8 +234,34 @@ img {
     display: inline-block;
 }
 
+.icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    margin-right: 8px;
+    vertical-align: middle; 
+    display: inline-block;
+}
 
+.change-team-btn {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
+.delete-user-btn {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 /* Pagination code from "Maketechstuff" - https://www.maketechstuff.com/2023/08/dynamic-pagination-in-javascript-step.html */
 
@@ -315,4 +338,63 @@ img {
     display: block;
     color: #000;
     transform: 0.2s;
+}
+
+/* Footer */
+.content {
+    flex: 1; /* This allows the content area to grow and push the footer down */
+}
+
+/* Footer styling */
+.footer {
+    background-color: #1a1a1a; /* Dark background for contrast */
+    color: #f0f0f0; /* Light text color */
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto; /* Center the footer content */
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.footer-links ul li a {
+    color: #f0f0f0;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.footer-links ul li a:hover {
+    text-decoration: underline;
+}
+
+.footer-social a {
+    margin: 0 10px;
+    color: #f0f0f0;
+    font-size: 1.5em;
+    text-decoration: none;
+}
+
+.footer-social a:hover {
+    color: #007bff; /* Highlight color on hover */
+}
+
+.footer-copyright {
+    font-size: 0.9em;
+    padding: 10px;
 }

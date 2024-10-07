@@ -1,10 +1,12 @@
+<link rel="stylesheet" href="css/style.css">
+
 <body>
     <h1>Welcome to {{user.username}}'s Profile!</h1>
     <p>{{user.username}}'s favorite team</p>
     
     <!-- Display the current team -->
     <p>Team Name: {{#if user.team_name}}
-        <img src="{{user.team_image}}" alt="{{user.team_name}}" style="width: 40px; height: 40px; object-fit: contain: margin-right: 8px; vertical-align: middle; display: inline-block;">
+        <img src="{{user.team_image}}" alt="{{user.team_name}}" style="    width: 40px; height: 40px; object-fit: contain; margin-right: 8px; vertical-align: middle; display: inline-block;">
         {{user.team_name}}
     {{else}}No team assigned{{/if}}</p>
     

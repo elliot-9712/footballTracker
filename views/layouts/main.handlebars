@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
 <header class="header">
     <nav>
-        <p id="logo">Premier League Tracker</p>
         <ul class="nav-links">
             <li><a href="/">Home</a></li>
             <li><a href="/table">Table</a></li>
@@ -20,6 +20,10 @@
                 <li><a href="/users">Users</a></li>
             {{/if}}
         </ul>
+
+        <!-- Center the logo -->
+        <p id="logo">Premier League Tracker</p>
+
         <ul class="nav-login">
             {{#if session.isLoggedIn}}
                 <li class="username-container">Hi, <a href="/profile/{{session.name}}">{{session.name}}</a> - <a href="/logout">Logout</a></li>
@@ -30,8 +34,34 @@
     </nav>
 </header>
 
-    {{{body}}}
 
-{{footer}}
+<div class="content">
+    {{{body}}}
+</div>
+
+<footer class="footer">
+        <div class="footer-container">
+            <div class="footer-links">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/table">Table</a></li>
+                    <li><a href="/schedule">Schedule</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+            </div>
+        
+            <div class="footer-social">
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+            </div>
+
+            <div class="footer-copyright">
+                <p>&copy; 2024 Premier League Tracker. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

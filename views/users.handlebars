@@ -1,4 +1,5 @@
 <body>
+<div class="table-container">
     <h1>Users List</h1>
     <table>
         <thead>
@@ -26,12 +27,12 @@
                         <option value="{{this.id}}" {{#if (eq this.id ../this.team_id)}}selected{{/if}}>{{this.name}}</option>
                     {{/each}}
                 </select>
-                <button type="submit">Change</button>
+                <button class="change-team-btn" type="submit">Change</button>
             </form>
             </td>
             <td>
                         <form action="/delete-user/{{this.user_id}}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');">
-                            <button type="submit" style="color: red;">Delete</button>
+                            <button class="delete-user-btn" type="submit">Delete</button>
                         </form>
                     </td>
                 </tr>
@@ -42,4 +43,5 @@
             {{/each}}
         </tbody>
     </table>
+    </div>
 </body>
