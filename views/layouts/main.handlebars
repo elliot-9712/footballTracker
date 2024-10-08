@@ -9,6 +9,9 @@
 <body>
 
 <header class="header">
+    <ul>
+        <p id="logo">Premier League Tracker</p>
+    </ul>
     <nav>
         <ul class="nav-links">
             <li><a href="/">Home</a></li>
@@ -20,10 +23,6 @@
                 <li><a href="/users">Users</a></li>
             {{/if}}
         </ul>
-
-        <!-- Center the logo -->
-        <p id="logo">Premier League Tracker</p>
-
         <ul class="nav-login">
             {{#if session.isLoggedIn}}
                 <li class="username-container">Hi, <a href="/profile/{{session.name}}">{{session.name}}</a> - <a href="/logout">Logout</a></li>

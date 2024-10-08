@@ -14,16 +14,19 @@ html, body {
 
 .header {
     display: flex;
-    align-items: center; /* Vertically center the items */
-    justify-content: space-between; /* Space between logo and nav */
-    padding: 10px; /* Add some padding for aesthetics */
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
 }
 
 nav {
-    width: 100%; /* Ensure nav takes full width */
     display: flex;
-    justify-content: space-between; /* Keep elements aligned on the left and right */
-    align-items: center; /* Vertically center items */
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; /* Takes full width */
+    flex-wrap: wrap; /* Allows elements to stack when necessary */
 }
 
 #logo {
@@ -31,17 +34,15 @@ nav {
     font-size: 1.2em;
     padding: 5px;
     border: 2px solid black;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto; /* Automatically center the logo */
+    display: inline-block;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .nav-links {
-    display: flex;
-    list-style-type: none;
-    margin: 0 20px; /* Add margin for spacing */
-    padding: 0; /* Reset padding */
+    flex-grow: 1; /* Allow the nav links to take available space */
+    justify-content: flex-start;
+    margin-left: 20px;
 }
 
 .nav-links li {
@@ -54,14 +55,23 @@ nav {
     font-size: 18px;
 }
 
-.nav-login {
+/* Align nav-links and nav-login in a row */
+.nav-links, .nav-login {
     display: flex;
     list-style-type: none;
-    margin-left: auto; /* Push this section to the right */
+}
+.nav-login {
+    justify-content: flex-end;
+    margin-left: auto; /* Push login to the right */
 }
 
 .nav-login li {
     margin-left: 20px; /* Use margin-left for spacing */
+}
+
+.nav-login a {
+    text-decoration: none;
+    color: black;
 }
 
 .username-container {
@@ -125,7 +135,11 @@ nav a:hover {
     padding-right: 20px; /* Right padding */
 }
 
-/* Table Styling */
+
+.table-wrapper {
+    overflow-x: auto; /* Enable horizontal scrolling on small screens */
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -143,26 +157,11 @@ th, td {
     padding: 12px;
     text-align: center;
     border: 1px solid #dddddd;
-    overflow: hidden; /* Prevents overflow of text */
     text-overflow: ellipsis; /* Adds ellipsis if text is too long */
     white-space: nowrap; /* Prevents text from wrapping */
 }
 
-/* Set fixed widths for Date, Result, Home Team, and Away Team columns */
-th:nth-child(1), td:nth-child(1) {  /* Date */
-    width: 100px;  /* Adjust as needed */
-}
-
-th:nth-child(2), td:nth-child(2), /* Home Team */
-th:nth-child(4), td:nth-child(4) { /* Away Team */
-    width: 150px; /* Adjust as needed for Home and Away teams */
-}
-
-th:nth-child(3), td:nth-child(3),
-th:nth-child(5), td:nth-child(5) { /* Result */
-    width: 100px; /* Same as Date for uniformity */
-}
-
+/* Table row styling */
 tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
@@ -174,10 +173,22 @@ tbody tr:hover {
 th {
     font-weight: bold;
     font-size: 16px;
+    white-space: pre-wrap;
 }
 
 td {
     font-size: 12px;
+}
+
+.team img {
+    width: 20px; /* Small team logo */
+    height: auto;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.team span {
+    vertical-align: middle;
 }
 
 /* Flexbox layout for team logo and name */
@@ -195,7 +206,7 @@ td {
 }
 
 .team span {
-    white-space: nowrap; /* Prevent text from wrapping */
+    white-space: pre-wrap; /* Prevent text from wrapping */
 }
 
 /* Applying different borders based on position */
@@ -397,4 +408,459 @@ img {
 .footer-copyright {
     font-size: 0.9em;
     padding: 10px;
+}
+
+@media screen and (max-width: 1450px) and (min-width: 1001px) {
+    .table-container {
+        max-width: 90%; /* Slightly wider table container */
+        padding: 15px;
+    }
+
+    table {
+        font-size: 13px; /* Adjust table font size */
+    }
+
+    th, td {
+        padding: 10px; /* Adjust padding */
+        font-size: 11px; /* Increase font size slightly */
+        
+    }
+
+    .table-wrapper, 
+    th:nth-child(1), td:nth-child(1) {
+        width: 70px; /* Adjust column width */
+    }
+
+    .table-wrapper, 
+    th:nth-child(2), td:nth-child(2)
+     {
+        width: 120px; /* Adjust team column width */
+    }
+
+    .table-wrapper,
+    th:nth-child(3), td:nth-child(3),
+    th:nth-child(4), td:nth-child(4),
+    th:nth-child(5), td:nth-child(5),
+    th:nth-child(6), td:nth-child(6),
+    th:nth-child(7), td:nth-child(7),
+    th:nth-child(8), td:nth-child(8),
+    th:nth-child(9), td:nth-child(9),
+    th:nth-child(10), td:nth-child(10) {
+        width: auto;
+    }
+}
+
+/* Responsive Styling for 1000px to 751px */
+@media screen and (max-width: 1000px) and (min-width: 751px) {
+
+    /* Header section */
+    .header {
+        flex-direction: row; /* Still maintain horizontal layout */
+        padding: 10px; /* Reduce padding slightly */
+    }
+
+    #logo {
+        font-size: 1.1em; /* Slightly smaller logo */
+        padding: 5px;
+        margin: 0 auto; /* Center logo */
+    }
+
+    nav {
+        flex-direction: row; /* Maintain row layout */
+        justify-content: space-between;
+    }
+
+    .nav-links {
+        margin: 0 15px; /* Reduce spacing */
+    }
+
+    .nav-links li {
+        margin-right: 15px; /* Decrease margin between nav items */
+    }
+
+    .nav-login {
+        margin-top: 0; /* Keep on same line */
+    }
+
+    .nav-login a {
+        text-decoration: none;
+        color: black;
+    }
+
+    /* Login container */
+    .login-container {
+        max-width: 450px; /* Set a max width */
+        padding: 15px; /* Adjust padding */
+        margin: 40px auto; /* Center with reduced top margin */
+    }
+
+    .login-container h1 {
+        font-size: 1.7em; /* Adjust heading size */
+    }
+
+    .login-container input, .login-container button {
+        padding: 8px; /* Adjust padding */
+    }
+
+    /* Table container */
+    .table-container {
+        max-width: 90%; /* Slightly wider table container */
+        padding: 15px;
+    }
+
+    table {
+        font-size: 13px; /* Adjust table font size */
+    }
+
+    th, td {
+        padding: 10px; /* Adjust padding */
+        font-size: 11px; /* Increase font size slightly */
+    }
+
+    .table-wrapper, 
+    th:nth-child(1), td:nth-child(1) {
+        width: 50px; /* Adjust column width */
+    }
+
+    .table-wrapper, 
+    th:nth-child(2), td:nth-child(2)
+     {
+        width: 100px; /* Adjust team column width */
+    }
+
+    .table-wrapper,
+    th:nth-child(3), td:nth-child(3),
+    th:nth-child(4), td:nth-child(4),
+    th:nth-child(5), td:nth-child(5),
+    th:nth-child(6), td:nth-child(6),
+    th:nth-child(7), td:nth-child(7),
+    th:nth-child(8), td:nth-child(8),
+    th:nth-child(9), td:nth-child(9),
+    th:nth-child(10), td:nth-child(10) {
+        width: auto;
+    }
+
+    /* Footer adjustments */
+    .footer-container {
+        flex-direction: row; /* Keep footer content in a row */
+        justify-content: space-between; /* Distribute items evenly */
+        padding: 15px;
+    }
+
+    .footer-links ul li {
+        margin: 0 12px; /* Adjust spacing between links */
+    }
+
+    .footer-social a {
+        font-size: 1.3em; /* Slightly adjust icon size */
+    }
+
+    /* Button adjustments */
+    .change-team-btn, .delete-user-btn {
+        padding: 10px; /* Increase button padding */
+        font-size: 15px; /* Adjust font size */
+    }
+}
+
+/* Responsive Styling for 750px to 451px */
+@media screen and (max-width: 750px) and (min-width: 551px) {
+
+    /* Header section */
+    .header {
+        flex-direction: column; /* Stack header elements */
+        padding: 8px;
+    }
+
+    #logo {
+        font-size: 1em; /* Adjust logo size */
+        padding: 4px;
+        width: 100%; /* Full width for logo */
+        margin: 5px 0;
+    }
+
+
+    nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .nav-links {
+        margin: 0;
+        justify-content: center;
+    }
+    .nav-links li {
+        margin-right: 10px; /* Decrease spacing between links */
+    }
+
+    .nav-login {
+        margin-top: 10px;
+        flex-direction: row; /* Place login next to nav-links */
+    }
+
+    .nav-login li {
+        margin-left: 10px;
+    }
+
+    .nav-login a {
+        text-decoration: none;
+        color: black;
+    }
+
+    /* Login container */
+    .login-container {
+        max-width: 100%; /* Full width for login container */
+        padding: 10px; /* Reduce padding */
+        margin: 30px auto; /* Adjust margin */
+    }
+
+    .login-container h1 {
+        font-size: 1.5em; /* Reduce heading size */
+    }
+
+    .login-container input, .login-container button {
+        padding: 6px; /* Reduce padding */
+    }
+
+    /* Table container */
+    .table-container {
+        max-width: 100%; /* Full width for table container */
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    table {
+        font-size: 12px; /* Decrease font size */
+    }
+
+    th, td {
+        padding: 8px; /* Adjust padding */
+        font-size: 10px; /* Reduce font size */
+    }
+
+    .table-wrapper, 
+    th:nth-child(1), td:nth-child(1) {
+        width: 50px; /* Adjust column width */
+    }
+
+    .table-wrapper, 
+    th:nth-child(2), td:nth-child(2)
+     {
+        width: 100px; /* Adjust team column width */
+    }
+
+    .table-wrapper,
+    th:nth-child(3), td:nth-child(3),
+    th:nth-child(4), td:nth-child(4),
+    th:nth-child(5), td:nth-child(5),
+    th:nth-child(6), td:nth-child(6),
+    th:nth-child(7), td:nth-child(7),
+    th:nth-child(8), td:nth-child(8),
+    th:nth-child(9), td:nth-child(9),
+    th:nth-child(10), td:nth-child(10) {
+        width: auto;
+    }
+
+    /* Footer adjustments */
+    .footer-container {
+        flex-direction: column; /* Stack footer items */
+        align-items: center;
+        padding: 10px;
+    }
+
+    .footer-links ul li {
+        margin: 0 10px; /* Adjust spacing between links */
+    }
+
+    .footer-social a {
+        font-size: 1.2em; /* Adjust social icon size */
+    }
+
+    /* Button adjustments */
+    .change-team-btn, .delete-user-btn {
+        padding: 8px; /* Adjust button padding */
+        font-size: 14px; /* Adjust font size */
+    }
+}
+
+
+@media screen and (max-width: 550px) {
+/* Header section */
+.header {
+    display: flex;
+    flex-direction: column; /* Stack everything vertically */
+    align-items: center; /* Center-align all content */
+    padding: 5px; /* Minimal padding */
+    width: 100%; /* Full width for better alignment */
+}
+
+#logo {
+    font-size: 0.9em; /* Adjust logo size */
+    padding: 2px; /* Minimal padding */
+    width: 100%; /* Ensure full width */
+    text-align: center; /* Center the logo text */
+    margin: 5px 0; /* Small margin around the logo */
+}
+
+nav {
+    display: flex;
+    flex-direction: column; /* Stack navigation and login */
+    align-items: center; /* Center-align navigation and login */
+    width: 100%; /* Full width */
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    flex-direction: column; /* Stack navigation links vertically */
+    align-items: center; /* Center the links */
+    margin-bottom: 10px; /* Space between navigation and login */
+    width: 100%; /* Full width */
+}
+
+.nav-links li {
+    margin: 5px 0; /* Add space between each nav link */
+    list-style: none; /* Remove default bullet points */
+}
+
+.nav-links a {
+    text-align: center; /* Center-align text in links */
+    display: block;
+    width: 100%; /* Ensure full width for better tapping experience */
+}
+
+/* Login Section */
+.nav-login {
+    display: flex; /* Flexbox for layout */
+    justify-content: center; /* Center login items horizontally */
+    align-items: center; /* Center login items vertically */
+    flex-direction: column; /* Stack login items */
+    margin-top: 10px; /* Add some space above login section */
+    width: 100%; /* Full width */
+}
+
+.nav-login li {
+    margin: 5px 0; /* Add space between login elements */
+}
+
+.nav-login a {
+    text-align: center; /* Center-align login link text */
+    display: block;
+    width: 100%; /* Full width for touch-friendly links */
+    text-decoration: none;
+    color: black;
+}
+
+    /* Login container */
+    .login-container {
+        max-width: 100%; /* Full width for smaller screens */
+        padding: 10px; /* Reduce padding */
+        margin: 20px auto; /* Reduce top margin */
+    }
+
+    .login-container h1 {
+        font-size: 1.2em; /* Adjust font size */
+    }
+
+    .login-container input, .login-container button {
+        padding: 5px; /* Reduce input and button padding */
+    }
+
+    .login-container button {
+        font-size: 14px; /* Reduce button font size */
+    }
+
+    /* Table container */
+    .table-container {
+        max-width: 100%; /* Full width on smaller screens */
+        padding: 5px; /* Less padding */
+    }
+
+    /* Table adjustments */
+    table {
+        font-size: 10px; /* Further reduce font size */
+    }
+
+    th, td {
+        padding: 6px; /* Decrease padding */
+        font-size: 9px; /* Adjust font size */
+    }
+
+    th:nth-child(1), td:nth-child(1),
+    th:nth-child(3), td:nth-child(3),
+    th:nth-child(5), td:nth-child(5) {
+        width: 60px; /* Narrow the date and result columns */
+    }
+
+    th:nth-child(2), td:nth-child(2),
+    th:nth-child(4), td:nth-child(4) {
+        width: 80px; /* Reduce home and away team column widths */
+    }
+
+    .table-wrapper, 
+    th:nth-child(1), td:nth-child(1) {
+        width: 50px; /* Adjust column width */
+    }
+
+    .table-wrapper, 
+    th:nth-child(2), td:nth-child(2)
+     {
+        width: 100px; /* Adjust team column width */
+    }
+
+    .table-wrapper,
+    th:nth-child(3), td:nth-child(3),
+    th:nth-child(4), td:nth-child(4),
+    th:nth-child(5), td:nth-child(5),
+    th:nth-child(6), td:nth-child(6),
+    th:nth-child(7), td:nth-child(7),
+    th:nth-child(8), td:nth-child(8),
+    th:nth-child(9), td:nth-child(9),
+    th:nth-child(10), td:nth-child(10) {
+        width: auto;
+    }
+
+    /* Footer adjustments */
+    .footer-container {
+        flex-direction: column; /* Stack footer content */
+        align-items: center;
+        padding: 10px;
+    }
+
+    .footer-links ul li {
+        display: block; /* Stack links vertically */
+        margin: 5px 0; /* Add some vertical spacing */
+    }
+
+    .footer-social a {
+        font-size: 1.2em; /* Adjust icon size */
+    }
+
+    /* Button adjustments */
+    .change-team-btn, .delete-user-btn {
+        padding: 6px; /* Reduce button padding */
+        font-size: 12px; /* Reduce font size */
+    }
+
+    /* Box and pagination adjustments */
+    .box {
+        padding: 5px;
+        margin: 5px;
+    }
+
+    .box ul li {
+        width: 30px; /* Smaller width for pagination buttons */
+        height: 30px;
+        line-height: 30px;
+    }
+
+    .box button {
+        font-size: 14px; /* Reduce button font size */
+    }
+
+    .box ul li a {
+        font-size: 1.5rem; /* Slightly reduce font size */
+    }
 }
