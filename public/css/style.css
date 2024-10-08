@@ -135,9 +135,27 @@ nav a:hover {
     padding-right: 20px; /* Right padding */
 }
 
+.table-wrapper, 
+th:nth-child(1), td:nth-child(1) {
+    width: 70px; /* Adjust column width */
+}
 
-.table-wrapper {
-    overflow-x: auto; /* Enable horizontal scrolling on small screens */
+.table-wrapper, 
+th:nth-child(2), td:nth-child(2)
+ {
+    width: 120px; /* Adjust team column width */
+}
+
+.table-wrapper,
+th:nth-child(3), td:nth-child(3),
+th:nth-child(4), td:nth-child(4),
+th:nth-child(5), td:nth-child(5),
+th:nth-child(6), td:nth-child(6),
+th:nth-child(7), td:nth-child(7),
+th:nth-child(8), td:nth-child(8),
+th:nth-child(9), td:nth-child(9),
+th:nth-child(10), td:nth-child(10) {
+    width: auto;
 }
 
 table {
@@ -255,8 +273,8 @@ img {
 }
 
 .change-team-btn {
-    margin-top: 15px;
     padding: 10px;
+    margin: 15px;
     background-color: #007bff;
     color: white;
     border: none;
@@ -265,7 +283,7 @@ img {
 }
 
 .delete-user-btn {
-    margin-top: 15px;
+    margin: 15px;
     padding: 10px;
     background-color: red;
     color: white;
@@ -555,10 +573,20 @@ img {
         font-size: 1.3em; /* Slightly adjust icon size */
     }
 
+    .button-container {
+        display: flex;            /* Use flexbox layout */
+        justify-content: center;  /* Center horizontally */
+        align-items: center;      /* Center vertically */
+        flex-direction: column;    /* Stack buttons vertically if desired */
+        padding: 10px;           /* Optional padding around the container */
+    }
+    
     /* Button adjustments */
     .change-team-btn, .delete-user-btn {
-        padding: 10px; /* Increase button padding */
-        font-size: 15px; /* Adjust font size */
+        padding: 8px; /* Increase button padding */
+        font-size: 12px; /* Adjust font size */
+        display: flex;
+        flex-grow: -1;
     }
 }
 
@@ -663,6 +691,30 @@ img {
         width: auto;
     }
 
+    .team-name {
+        text-align: center; /* Center align text */
+        align-items: center;
+        margin: 0 auto;
+    }
+    
+    .team-info {
+        display: flex; /* Enable flexbox layout */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally */
+    }
+    
+    .team-image {
+        width: 40px; /* Set a fixed width for the image */
+        height: 40px; /* Set a fixed height for the image */
+        object-fit: contain; /* Maintain aspect ratio */
+        margin-bottom: 4px; /* Space between the image and text */
+    }
+    
+    .team-text {
+        word-wrap: break-word; /* Allow words to break onto the next line */
+        white-space: normal; /* Allow normal text wrapping */
+    }
+
     /* Footer adjustments */
     .footer-container {
         flex-direction: column; /* Stack footer items */
@@ -676,6 +728,14 @@ img {
 
     .footer-social a {
         font-size: 1.2em; /* Adjust social icon size */
+    }
+    
+    select {
+        max-width: 200px; /* Set maximum width for dropdown */
+        width: 100%; /* Allow full width */
+        padding: 6px; /* Adjust padding */
+        margin-bottom: 8px; /* Space below dropdown */
+        font-size: 14px; /* Adjust font size */
     }
 
     /* Button adjustments */
@@ -706,29 +766,32 @@ img {
 
 nav {
     display: flex;
-    flex-direction: column; /* Stack navigation and login */
+    flex-direction: column; /* Stack navigation and login vertically */
     align-items: center; /* Center-align navigation and login */
     width: 100%; /* Full width */
 }
 
 /* Navigation Links */
 .nav-links {
-    display: flex;
-    flex-direction: column; /* Stack navigation links vertically */
-    align-items: center; /* Center the links */
+    display: flex; /* Enable flexbox */
+    flex-wrap: wrap; /* Allow wrapping of navigation links */
+    justify-content: center; /* Center the links horizontally */
+    align-items: flex-start; /* Align items at the start */
     margin-bottom: 10px; /* Space between navigation and login */
-    width: 100%; /* Full width */
+    width: 50%; /* Width of the navigation links container */
 }
 
 .nav-links li {
-    margin: 5px 0; /* Add space between each nav link */
+    margin: 5px; /* Space around each nav link */
     list-style: none; /* Remove default bullet points */
+    width: 5rem; /* Allow three items per row, accounting for margins */
 }
-
 .nav-links a {
     text-align: center; /* Center-align text in links */
-    display: block;
-    width: 100%; /* Ensure full width for better tapping experience */
+    display: block; /* Make the link a block element */
+
+    text-decoration: none; /* Remove underline from links */
+    color: black; /* Text color */
 }
 
 /* Login Section */
@@ -822,6 +885,30 @@ nav {
         width: auto;
     }
 
+    .team-name {
+        text-align: center; /* Center align text */
+        align-items: center;
+        margin: 0 auto;
+    }
+    
+    .team-info {
+        display: flex; /* Enable flexbox layout */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally */
+    }
+    
+    .team-image {
+        width: 30px; /* Set a fixed width for the image */
+        height: 30px; /* Set a fixed height for the image */
+        object-fit: contain; /* Maintain aspect ratio */
+        margin-bottom: 3px; /* Space between the image and text */
+    }
+    
+    .team-text {
+        word-wrap: break-word; /* Allow words to break onto the next line */
+        white-space: normal; /* Allow normal text wrapping */
+    }
+
     /* Footer adjustments */
     .footer-container {
         flex-direction: column; /* Stack footer content */
@@ -838,10 +925,27 @@ nav {
         font-size: 1.2em; /* Adjust icon size */
     }
 
+    .change-team-container {
+        display: flex; /* Use flexbox for alignment */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items */
+        max-width: 100%; /* Allow full width */
+        width: 100%; /* Allow full width */
+    }
+    
+    /* Style for the dropdown select */
+    select {
+        max-width: 200px; /* Set maximum width for dropdown */
+        width: 100%; /* Allow full width */
+        padding: 6px; /* Adjust padding */
+        margin-bottom: 8px; /* Space below dropdown */
+        font-size: 14px; /* Adjust font size */
+    }
+
     /* Button adjustments */
     .change-team-btn, .delete-user-btn {
-        padding: 6px; /* Reduce button padding */
-        font-size: 12px; /* Reduce font size */
+        padding: 4px; /* Reduce button padding */
+        font-size: 10px; /* Reduce font size */
     }
 
     /* Box and pagination adjustments */
