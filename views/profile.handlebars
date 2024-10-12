@@ -1,25 +1,34 @@
-<link rel="stylesheet" href="css/style.css">
-
 <body>
-    <h1>Welcome to {{user.username}}'s Profile!</h1>
-    <p>{{user.username}}'s favorite team</p>
-    
-    <!-- Display the current team -->
-    <p>Team Name: {{#if user.team_name}}
-        <img src="{{user.team_image}}" alt="{{user.team_name}}" style="    width: 40px; height: 40px; object-fit: contain; margin-right: 8px; vertical-align: middle; display: inline-block;">
-        {{user.team_name}}
-    {{else}}No team assigned{{/if}}</p>
-    
-    <!-- Team Selection Form -->
-    <form action="/profile/{{user.username}}/update" method="POST">
-        <label for="team">Select a new team:</label>
-        <select name="team" id="team">
-            {{#each teams}}
-                <option value="{{this.id}}" {{#if (eq this.id ../user.current_team_id)}}selected{{/if}}>{{this.name}}</option>
-            {{/each}}
-        </select>
-        <button type="submit">Update Team</button>
-    </form>
+    <div class="profile-container">
+        <h1>Welcome to {{user.username}}'s Profile!</h1>
+        <p>{{user.username}}'s favorite team</p>
+        
+        <!-- Display the current team -->
+        <p class="team-container">Team Name: 
+            {{#if user.team_name}}
+                <span>
+                    <img src="{{user.team_image}}" alt="{{user.team_name}}">
+                    <span>{{user.team_name}}</span>
+                </span>
+            {{else}}
+                <span>No team assigned</span>
+            {{/if}}
+        </p>
+        
+        <!-- Team Selection Form -->
+        <form action="/profile/{{user.username}}/update" method="POST" class="team-selection-form">
+            <label for="team">Select a new team:</label>
+            <select name="team" id="team">
+                {{#each teams}}
+                    <option value="{{this.id}}" {{#if (eq this.id ../user.current_team_id)}}selected{{/if}}>{{this.name}}</option>
+                {{/each}}
+            </select>
+            <button type="submit" class="update-team">Update Team</button>
+        </form>
 
-    <a href="/">Back to Home</a>
+        <div class="button-container">
+            <a href="/" class="change-team-btn">Back to Home</a>
+            <a href="/logout" class="delete-user-btn">Logout</a>
+        </div>
+    </div>
 </body>

@@ -1,0 +1,39 @@
+<div class="table-container">
+    <h2>{{team.name}}'s Games</h2>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th class="date">Date</th>
+                    <th class="home-team">Home Team</th>
+                    <th class="result">Result</th>
+                    <th class="away-team">Away Team</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each matches}}
+                    <tr>
+                        <td>{{this.date}}</td>
+                        <td>
+                            <div class="team">
+                                <img src="{{this.home_team_image}}" alt="{{this.home_team_name}}">
+                                <span>{{this.home_team_name}}</span>
+                            </div>
+                        </td>
+                        <td>{{this.home_team_goals}} - {{this.away_team_goals}}</td>
+                        <td>
+                            <div class="team">
+                                <img src="{{this.away_team_image}}" alt="{{this.away_team_name}}">
+                                <span>{{this.away_team_name}}</span>
+                            </div>
+                        </td>
+                    </tr>
+                {{else}}
+                    <tr>
+                        <td colspan="4">No matches available.</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

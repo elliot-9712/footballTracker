@@ -285,30 +285,46 @@ app.get('/profile/:username', (req, res) => {
             users.team = teams.id 
         WHERE 
             users.username = ?`, [username], (err, user) => {
+        
         if (err) {
             return res.status(500).send('Server Error');
         }
+        
+        // Check if user exists
         if (!user) {
             console.log('User not found in the database.'); // Log if user is not found
-            return res.status(404).send('User not found');
+            
+            // If the username is for an admin, create a default admin profile
+            if (username === 'admin') { // Replace 'admin' with your actual admin username or condition
+                user = {
+                    user_id: null,
+                    username: 'admin',
+                    team_id: null,
+                    team_name: null,
+                    team_image: null,
+                };
+            } else {
+                return res.status(404).send('User not found');
+            }
         }
 
+        // Retrieve all teams for the dropdown or any other purpose
         db.all(`SELECT id, name FROM teams ORDER BY id`, [], (err, teams) => {
             if (err) {
                 return res.status(500).send('Server Error');
             }
 
             const model = {
-                layout: false,
                 user,
-                teams,  // Pass all teams to the template
-                title: `${user.username}'s Profile`
+                teams  // Pass all teams to the template
             };
 
-        res.render('profile.handlebars', model); // Renders the profile.handlebars using the main layout
+            // Render the profile page using the model
+            res.render('profile.handlebars', model);
+        });
     });
 });
-})
+
 
 app.post('/profile/:username/update', (req, res) => {
     const username = req.params.username;                 // Get the username from the URL
@@ -337,6 +353,51 @@ app.get('/table', (req, res) => {
         res.render('table.handlebars', { teams: rows });
     });
 });
+
+
+// Route for individual team pages based on the actual team name
+app.get('/teams/:name', (req, res) => {
+    const teamName = (req.params.name);
+
+    const teamQuery = "SELECT * FROM teams WHERE name = ?";
+
+    const matchesQuery = `
+        SELECT m.*, 
+               ht.name AS home_team_name, ht.image AS home_team_image, 
+               at.name AS away_team_name, at.image AS away_team_image 
+        FROM matches m
+        JOIN teams ht ON m.home_team_id = ht.id
+        JOIN teams at ON m.away_team_id = at.id
+        WHERE ht.name = ? OR at.name = ?
+        ORDER BY m.date`;
+
+    // Run both queries in parallel
+    db.get(teamQuery, [teamName], (err, teamRow) => {
+        if (err || !teamRow) {
+            return res.status(500).send("Error retrieving team data.");
+        }
+
+        db.all(matchesQuery, [teamName, teamName], (err, matchesRows) => {
+            if (err) {
+                return res.status(500).send("Error retrieving matches.");
+            }
+
+            // Render the team page with both team data and filtered matches
+            res.render('team.handlebars', { 
+                team: teamRow, 
+                matches: matchesRows 
+            });
+        });
+    });
+});
+
+
+
+
+
+
+
+
 
 app.get('/schedule', (req, res) => {
     // Fetch all available game weeks to populate the dropdown

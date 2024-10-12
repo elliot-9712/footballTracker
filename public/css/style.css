@@ -27,6 +27,8 @@ nav {
     align-items: center;
     width: 100%; /* Takes full width */
     flex-wrap: wrap; /* Allows elements to stack when necessary */
+    margin-top: 1rem;
+    
 }
 
 #logo {
@@ -56,34 +58,75 @@ nav {
 }
 
 /* Align nav-links and nav-login in a row */
-.nav-links, .nav-login {
+.nav-links {
     display: flex;
     list-style-type: none;
 }
-.nav-login {
-    justify-content: flex-end;
-    margin-left: auto; /* Push login to the right */
-}
 
-.nav-login li {
-    margin-left: 20px; /* Use margin-left for spacing */
-}
-
-.nav-login a {
-    text-decoration: none;
-    color: black;
-}
-
-.username-container {
-    display: flex; /* Use flex to keep username and button inline */
-    align-items: center; /* Center vertically */
-    position: relative; /* Positioning for the logout button */
-}
 
 nav a:hover {
     color: #007bff; /* Change link color on hover */
 }
 
+.profile-container {
+    width: 100%;
+    margin: 50px auto; /* Center the container */
+    padding: 20px;
+    background-color: #fff; /* White background for the profile */
+}
+
+.profile-container h1 {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-container p {
+    font-size: 16px;
+    color: #555; /* Slightly lighter text color */
+    text-align: center; /* Center align */
+}
+
+.team-container {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.team-container img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.update-team {
+    padding: 10px;
+    margin: 15px;
+    background-color: #007bff;
+    align-items: center;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.team-selection-form {
+    margin-top: 20px; /* Space above form */
+    text-align: center; /* Center align */
+}
+
+/* Select Box */
+#team {
+    max-width: 200px; /* Set maximum width for dropdown */
+    width: 100%; /* Allow full width */
+    padding: 6px; /* Adjust padding */
+    margin-bottom: 15px; /* Space below dropdown */
+    font-size: 14px; /* Adjust font size */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Rounded corners */
+}
 
 .login-container {
     max-width: 400px;
@@ -135,26 +178,16 @@ nav a:hover {
     padding-right: 20px; /* Right padding */
 }
 
-.table-wrapper, 
-th:nth-child(1), td:nth-child(1) {
-    width: 70px; /* Adjust column width */
+
+.date {
+    width: 70px;
 }
 
-.table-wrapper, 
-th:nth-child(2), td:nth-child(2)
- {
-    width: 120px; /* Adjust team column width */
+.result {
+    width: 150px;
 }
 
-.table-wrapper,
-th:nth-child(3), td:nth-child(3),
-th:nth-child(4), td:nth-child(4),
-th:nth-child(5), td:nth-child(5),
-th:nth-child(6), td:nth-child(6),
-th:nth-child(7), td:nth-child(7),
-th:nth-child(8), td:nth-child(8),
-th:nth-child(9), td:nth-child(9),
-th:nth-child(10), td:nth-child(10) {
+.home-team, .away-team {
     width: auto;
 }
 
@@ -227,6 +260,11 @@ td {
     white-space: pre-wrap; /* Prevent text from wrapping */
 }
 
+.team-name {
+    text-decoration: none;
+    list-style-type: none;
+    color: black;
+}
 /* Applying different borders based on position */
 /* For Positions 1 to 4: Blue Border */
 .position-1 td:first-child,
@@ -254,7 +292,7 @@ td {
     border-right: 4px solid #ea4336;
 }
 
-img {
+.img {
     width: 40px;  /* Fixed width */
     height: 40px; /* Fixed height */
     object-fit: contain;  /* Maintain aspect ratio, fit within the container */
@@ -376,7 +414,7 @@ img {
 
 /* Footer styling */
 .footer {
-    background-color: #1a1a1a; /* Dark background for contrast */
+    background-color: #007bff;
     color: #f0f0f0; /* Light text color */
     padding: 20px 0;
     text-align: center;
@@ -428,6 +466,57 @@ img {
     padding: 10px;
 }
 
+.team-name {
+    text-align: center; /* Center align text */
+    align-items: center;
+    margin: 0 auto;
+}
+
+.team-info {
+    display: flex; /* Enable flexbox layout */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+}
+
+.team-image {
+    width: 40px; /* Set a fixed width for the image */
+    height: 40px; /* Set a fixed height for the image */
+    object-fit: contain; /* Maintain aspect ratio */
+    margin-bottom: 4px; /* Space between the image and text */
+}
+
+.team-text {
+    word-wrap: break-word; /* Allow words to break onto the next line */
+    white-space: normal; /* Allow normal text wrapping */
+}
+
+.button-container {
+    display: flex;            /* Use flexbox layout */
+    justify-content: center;  /* Center horizontally */
+    align-items: center;      /* Center vertically */
+    flex-direction: column;    /* Stack buttons vertically if desired */
+}
+
+.button-container a {
+    text-decoration: none;
+}
+
+select {
+    max-width: 200px; /* Set maximum width for dropdown */
+    width: 100%; /* Allow full width */
+    padding: 6px; /* Adjust padding */
+    margin-bottom: 8px; /* Space below dropdown */
+    font-size: 14px; /* Adjust font size */
+}
+
+/* Button adjustments */
+.change-team-btn, .delete-user-btn {
+    padding: 8px; /* Increase button padding */
+    font-size: 12px; /* Adjust font size */
+    display: flex;
+    flex-grow: -1;
+}
+
 @media screen and (max-width: 1450px) and (min-width: 1001px) {
     .table-container {
         max-width: 90%; /* Slightly wider table container */
@@ -444,28 +533,73 @@ img {
         
     }
 
-    .table-wrapper, 
-    th:nth-child(1), td:nth-child(1) {
-        width: 70px; /* Adjust column width */
+    .date .pos {
+        width: 70px;
     }
 
-    .table-wrapper, 
-    th:nth-child(2), td:nth-child(2)
-     {
-        width: 120px; /* Adjust team column width */
+    .club {
+        width: 120px;
     }
 
-    .table-wrapper,
-    th:nth-child(3), td:nth-child(3),
-    th:nth-child(4), td:nth-child(4),
-    th:nth-child(5), td:nth-child(5),
-    th:nth-child(6), td:nth-child(6),
-    th:nth-child(7), td:nth-child(7),
-    th:nth-child(8), td:nth-child(8),
-    th:nth-child(9), td:nth-child(9),
-    th:nth-child(10), td:nth-child(10) {
+    .auto {
         width: auto;
     }
+    
+    .result {
+        width: 150px;
+    }
+    
+    .home-team, .away-team {
+        width: auto;
+    }
+
+    .team-name {
+        text-align: center; /* Center align text */
+        align-items: center;
+        margin: 0 auto;
+    }
+    
+    .team-info {
+        display: flex; /* Enable flexbox layout */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally */
+    }
+    
+    .team-image {
+        width: 40px; /* Set a fixed width for the image */
+        height: 40px; /* Set a fixed height for the image */
+        object-fit: contain; /* Maintain aspect ratio */
+        margin-bottom: 4px; /* Space between the image and text */
+    }
+    
+    .team-text {
+        word-wrap: break-word; /* Allow words to break onto the next line */
+        white-space: normal; /* Allow normal text wrapping */
+    }
+
+    .button-container {
+        display: flex;            /* Use flexbox layout */
+        justify-content: center;  /* Center horizontally */
+        align-items: center;      /* Center vertically */
+        flex-direction: column;    /* Stack buttons vertically if desired */
+    }
+
+    select {
+        max-width: 200px; /* Set maximum width for dropdown */
+        width: 100%; /* Allow full width */
+        padding: 6px; /* Adjust padding */
+        margin-bottom: 8px; /* Space below dropdown */
+        font-size: 14px; /* Adjust font size */
+    }
+    
+    /* Button adjustments */
+    .change-team-btn, .delete-user-btn {
+        padding: 8px; /* Increase button padding */
+        font-size: 12px; /* Adjust font size */
+        display: flex;
+        flex-grow: -1;
+    }
+
 }
 
 /* Responsive Styling for 1000px to 751px */
@@ -494,15 +628,6 @@ img {
 
     .nav-links li {
         margin-right: 15px; /* Decrease margin between nav items */
-    }
-
-    .nav-login {
-        margin-top: 0; /* Keep on same line */
-    }
-
-    .nav-login a {
-        text-decoration: none;
-        color: black;
     }
 
     /* Login container */
@@ -535,28 +660,58 @@ img {
         font-size: 11px; /* Increase font size slightly */
     }
 
-    .table-wrapper, 
-    th:nth-child(1), td:nth-child(1) {
-        width: 50px; /* Adjust column width */
+
+    .date .pos {
+        width: 70px;
     }
 
-    .table-wrapper, 
-    th:nth-child(2), td:nth-child(2)
-     {
-        width: 100px; /* Adjust team column width */
+    .club {
+        width: 120px;
     }
 
-    .table-wrapper,
-    th:nth-child(3), td:nth-child(3),
-    th:nth-child(4), td:nth-child(4),
-    th:nth-child(5), td:nth-child(5),
-    th:nth-child(6), td:nth-child(6),
-    th:nth-child(7), td:nth-child(7),
-    th:nth-child(8), td:nth-child(8),
-    th:nth-child(9), td:nth-child(9),
-    th:nth-child(10), td:nth-child(10) {
+    .auto {
         width: auto;
     }
+
+
+    .player, .won, .drawn, .lost, .points {
+        width: auto;
+    }
+
+    
+    .result {
+        width: auto;
+    }
+    
+    .home-team, .away-team {
+        width: auto;
+    }
+
+    
+    .team-name {
+        text-align: center; /* Center align text */
+        align-items: center;
+        margin: 0 auto;
+    }
+    
+    .team-info {
+        display: flex; /* Enable flexbox layout */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally */
+    }
+    
+    .team-image {
+        width: 40px; /* Set a fixed width for the image */
+        height: 40px; /* Set a fixed height for the image */
+        object-fit: contain; /* Maintain aspect ratio */
+        margin-bottom: 4px; /* Space between the image and text */
+    }
+    
+    .team-text {
+        word-wrap: break-word; /* Allow words to break onto the next line */
+        white-space: normal; /* Allow normal text wrapping */
+    }
+
 
     /* Footer adjustments */
     .footer-container {
@@ -579,6 +734,14 @@ img {
         align-items: center;      /* Center vertically */
         flex-direction: column;    /* Stack buttons vertically if desired */
         padding: 10px;           /* Optional padding around the container */
+    }
+
+    select {
+        max-width: 200px; /* Set maximum width for dropdown */
+        width: 100%; /* Allow full width */
+        padding: 6px; /* Adjust padding */
+        margin-bottom: 8px; /* Space below dropdown */
+        font-size: 14px; /* Adjust font size */
     }
     
     /* Button adjustments */
@@ -623,20 +786,6 @@ img {
         margin-right: 10px; /* Decrease spacing between links */
     }
 
-    .nav-login {
-        margin-top: 10px;
-        flex-direction: row; /* Place login next to nav-links */
-    }
-
-    .nav-login li {
-        margin-left: 10px;
-    }
-
-    .nav-login a {
-        text-decoration: none;
-        color: black;
-    }
-
     /* Login container */
     .login-container {
         max-width: 100%; /* Full width for login container */
@@ -654,9 +803,8 @@ img {
 
     /* Table container */
     .table-container {
-        max-width: 100%; /* Full width for table container */
-        padding-left: 10px;
-        padding-right: 10px;
+        max-width: 90%; /* Slightly wider table container */
+        padding: 15px;
     }
 
     table {
@@ -668,26 +816,29 @@ img {
         font-size: 10px; /* Reduce font size */
     }
 
-    .table-wrapper, 
-    th:nth-child(1), td:nth-child(1) {
-        width: 50px; /* Adjust column width */
+    .date .pos {
+        width: 70px;
     }
 
-    .table-wrapper, 
-    th:nth-child(2), td:nth-child(2)
-     {
-        width: 100px; /* Adjust team column width */
+    .club {
+        width: 120px;
     }
 
-    .table-wrapper,
-    th:nth-child(3), td:nth-child(3),
-    th:nth-child(4), td:nth-child(4),
-    th:nth-child(5), td:nth-child(5),
-    th:nth-child(6), td:nth-child(6),
-    th:nth-child(7), td:nth-child(7),
-    th:nth-child(8), td:nth-child(8),
-    th:nth-child(9), td:nth-child(9),
-    th:nth-child(10), td:nth-child(10) {
+    .auto {
+        width: auto;
+    }
+
+
+    .player, .won, .drawn, .lost, .points {
+        width: auto;
+    }
+
+    
+    .result {
+        width: auto;
+    }
+    
+    .home-team, .away-team {
         width: auto;
     }
 
@@ -740,8 +891,8 @@ img {
 
     /* Button adjustments */
     .change-team-btn, .delete-user-btn {
-        padding: 8px; /* Adjust button padding */
-        font-size: 14px; /* Adjust font size */
+        padding: 6px; /* Adjust button padding */
+        font-size: 10px; /* Adjust font size */
     }
 }
 
@@ -777,8 +928,7 @@ nav {
     flex-wrap: wrap; /* Allow wrapping of navigation links */
     justify-content: center; /* Center the links horizontally */
     align-items: flex-start; /* Align items at the start */
-    margin-bottom: 10px; /* Space between navigation and login */
-    width: 50%; /* Width of the navigation links container */
+    width: 40%; /* Width of the navigation links container */
 }
 
 .nav-links li {
@@ -792,28 +942,6 @@ nav {
 
     text-decoration: none; /* Remove underline from links */
     color: black; /* Text color */
-}
-
-/* Login Section */
-.nav-login {
-    display: flex; /* Flexbox for layout */
-    justify-content: center; /* Center login items horizontally */
-    align-items: center; /* Center login items vertically */
-    flex-direction: column; /* Stack login items */
-    margin-top: 10px; /* Add some space above login section */
-    width: 100%; /* Full width */
-}
-
-.nav-login li {
-    margin: 5px 0; /* Add space between login elements */
-}
-
-.nav-login a {
-    text-align: center; /* Center-align login link text */
-    display: block;
-    width: 100%; /* Full width for touch-friendly links */
-    text-decoration: none;
-    color: black;
 }
 
     /* Login container */
@@ -837,8 +965,8 @@ nav {
 
     /* Table container */
     .table-container {
-        max-width: 100%; /* Full width on smaller screens */
-        padding: 5px; /* Less padding */
+        max-width: 90%; /* Slightly wider table container */
+        padding: 15px;
     }
 
     /* Table adjustments */
@@ -847,43 +975,39 @@ nav {
     }
 
     th, td {
-        padding: 6px; /* Decrease padding */
-        font-size: 9px; /* Adjust font size */
+        padding: 5px; /* Decrease padding */
+        font-size: 5px; /* Adjust font size */
     }
 
-    th:nth-child(1), td:nth-child(1),
-    th:nth-child(3), td:nth-child(3),
-    th:nth-child(5), td:nth-child(5) {
-        width: 60px; /* Narrow the date and result columns */
+    .date .pos {
+        width: 50px;
     }
 
-    th:nth-child(2), td:nth-child(2),
-    th:nth-child(4), td:nth-child(4) {
-        width: 80px; /* Reduce home and away team column widths */
-    }
-
-    .table-wrapper, 
-    th:nth-child(1), td:nth-child(1) {
-        width: 50px; /* Adjust column width */
-    }
-
-    .table-wrapper, 
-    th:nth-child(2), td:nth-child(2)
-     {
-        width: 100px; /* Adjust team column width */
-    }
-
-    .table-wrapper,
-    th:nth-child(3), td:nth-child(3),
-    th:nth-child(4), td:nth-child(4),
-    th:nth-child(5), td:nth-child(5),
-    th:nth-child(6), td:nth-child(6),
-    th:nth-child(7), td:nth-child(7),
-    th:nth-child(8), td:nth-child(8),
-    th:nth-child(9), td:nth-child(9),
-    th:nth-child(10), td:nth-child(10) {
+    .player, .won, .drawn, .lost, .points {
         width: auto;
     }
+
+    .club {
+        width: 75px;
+    }
+
+    .auto {
+        display: none;
+    }
+    
+    .result {
+        width: auto;
+    }
+    
+    .home-team, .away-team {
+        width: auto;
+    }
+    
+    .team img {
+        height: 20px;
+        width: 20px;
+    }
+    
 
     .team-name {
         text-align: center; /* Center align text */
@@ -898,8 +1022,8 @@ nav {
     }
     
     .team-image {
-        width: 30px; /* Set a fixed width for the image */
-        height: 30px; /* Set a fixed height for the image */
+        width: 20px; /* Set a fixed width for the image */
+        height: 20px; /* Set a fixed height for the image */
         object-fit: contain; /* Maintain aspect ratio */
         margin-bottom: 3px; /* Space between the image and text */
     }
@@ -935,17 +1059,16 @@ nav {
     
     /* Style for the dropdown select */
     select {
-        max-width: 200px; /* Set maximum width for dropdown */
-        width: 100%; /* Allow full width */
+        max-width: 100px; /* Set maximum width for dropdown */
+        width: 80%; /* Allow full width */
         padding: 6px; /* Adjust padding */
-        margin-bottom: 8px; /* Space below dropdown */
-        font-size: 14px; /* Adjust font size */
+        font-size: 8px; /* Adjust font size */
     }
 
     /* Button adjustments */
     .change-team-btn, .delete-user-btn {
         padding: 4px; /* Reduce button padding */
-        font-size: 10px; /* Reduce font size */
+        font-size: 5px; /* Reduce font size */
     }
 
     /* Box and pagination adjustments */

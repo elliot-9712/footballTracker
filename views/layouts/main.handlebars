@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
@@ -22,10 +22,8 @@
             {{#if session.isAdmin}}
                 <li><a href="/users">Users</a></li>
             {{/if}}
-        </ul>
-        <ul class="nav-login">
             {{#if session.isLoggedIn}}
-                <li class="username-container">Hi, <a href="/profile/{{session.name}}">{{session.name}}</a> - <a href="/logout">Logout</a></li>
+                <li>Hi, <a href="/profile/{{session.name}}">{{session.name}}</a></li>
             {{else}}
                 <li><a href="/login">Login</a></li>
             {{/if}}
