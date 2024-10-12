@@ -195,6 +195,7 @@ app.use((req, res, next) => {
 
 // Define routes
 app.get('/', function (req, res) {
+
     const model={
         isLoggedIn: req.session.isLoggedIn,
         name: req.session.name,

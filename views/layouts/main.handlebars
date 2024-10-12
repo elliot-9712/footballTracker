@@ -23,7 +23,7 @@
                 <li><a href="/users">Users</a></li>
             {{/if}}
             {{#if session.isLoggedIn}}
-                <li>Hi, <a href="/profile/{{session.name}}">{{session.name}}</a></li>
+                <li><a href="/profile/{{session.name}}">Profile</a></li>
             {{else}}
                 <li><a href="/login">Login</a></li>
             {{/if}}

@@ -21,6 +21,63 @@ html, body {
     flex-wrap: wrap; /* Allows wrapping on smaller screens */
 }
 
+/* Home */
+
+.home-container {
+    padding: 20px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.hero {
+    text-align: center;
+    background-color: #0073e6;
+    color: white;
+    padding: 50px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+}
+
+.hero p {
+    font-size: 1.2em;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #0073e6;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.introduction, .featured-matches, .recent-news {
+    margin-bottom: 30px;
+}
+
+.featured-matches li {
+list-style-type: none;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.match-info {
+    display: flex;
+    justify-content: center; /* Centers items horizontally */
+    align-items: center;    /* Centers items vertically */
+    text-align: center;     /* Centers text inside child elements */
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
 nav {
     display: flex;
     justify-content: space-between;
@@ -66,6 +123,35 @@ nav {
 
 nav a:hover {
     color: #007bff; /* Change link color on hover */
+}
+
+/* Contact */
+.contact-container {
+    align-items: center;
+    padding: 20px; /* Add some padding to avoid content touching the edges */
+    box-sizing: border-box;
+    overflow: hidden; /* Prevent scrollbars */
+    display: flex; /* Add flexbox for container alignment */
+    flex-direction: column; /* Stack items vertically on smaller screens */
+}
+
+.text-section {
+    display: flex; /* Use flexbox for alignment */
+    flex-direction: column; /* Align items in a column */
+    justify-content: center; /* Center content vertically */
+    margin: 1rem;
+    width: 100%; /* Use full width */
+    max-width: 600px; /* Max width for larger screens */
+    height: auto; /* Allow height to adjust */
+    text-align: center;
+    padding: 20px; /* Add some padding inside the section */
+}
+
+.map-section {
+    margin: 1rem;
+    width: 100%; /* Use full width */
+    max-width: 600px; /* Max width for larger screens */
+    height: auto; /* Allow height to adjust */
 }
 
 .profile-container {
