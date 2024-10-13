@@ -1,5 +1,13 @@
 <body>
     <div class="profile-container">
+     {{#if session.isAdmin}}
+        <h1>Welcome to the {{user.username}} Profile!</h1>
+
+                    <div class="button-container">
+            <a href="/users" class="change-team-btn">See all users</a>
+            <a href="/logout" class="delete-user-btn">Logout</a>
+        </div>
+        {{else}}
         <h1>Welcome to {{user.username}}'s Profile!</h1>
         <p>{{user.username}}'s favorite team</p>
         
@@ -26,9 +34,10 @@
             <button type="submit" class="update-team">Update Team</button>
         </form>
 
-        <div class="button-container">
+                <div class="button-container">
             <a href="/" class="change-team-btn">Back to Home</a>
             <a href="/logout" class="delete-user-btn">Logout</a>
         </div>
+                {{/if}}
     </div>
 </body>

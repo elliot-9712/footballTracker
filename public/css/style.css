@@ -155,21 +155,21 @@ nav a:hover {
 }
 
 .profile-container {
-    width: 100%;
+    width: 90%;
     margin: 50px auto; /* Center the container */
     padding: 20px;
     background-color: #fff; /* White background for the profile */
 }
 
 .profile-container h1 {
-    font-size: 24px;
+    font-size: 2rem;
     color: #333;
     text-align: center;
     margin-bottom: 20px;
 }
 
 .profile-container p {
-    font-size: 16px;
+    font-size: 1rem;
     color: #555; /* Slightly lighter text color */
     text-align: center; /* Center align */
 }
@@ -201,7 +201,17 @@ nav a:hover {
 .team-selection-form {
     margin-top: 20px; /* Space above form */
     text-align: center; /* Center align */
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.team-selection-form button {
+margin-top: 10px;
+width: auto;
+}
+
 
 /* Select Box */
 #team {
@@ -596,7 +606,7 @@ select {
 }
 
 /* Button adjustments */
-.change-team-btn, .delete-user-btn {
+.change-team-btn, .delete-user-btn, .update-team {
     padding: 8px; /* Increase button padding */
     font-size: 12px; /* Adjust font size */
     display: flex;
@@ -679,7 +689,7 @@ select {
     }
     
     /* Button adjustments */
-    .change-team-btn, .delete-user-btn {
+    .change-team-btn, .delete-user-btn, .update-team{
         padding: 8px; /* Increase button padding */
         font-size: 12px; /* Adjust font size */
         display: flex;
@@ -701,6 +711,14 @@ select {
         font-size: 1.1em; /* Slightly smaller logo */
         padding: 5px;
         margin: 0 auto; /* Center logo */
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1rem;
     }
 
     nav {
@@ -819,7 +837,6 @@ select {
         justify-content: center;  /* Center horizontally */
         align-items: center;      /* Center vertically */
         flex-direction: column;    /* Stack buttons vertically if desired */
-        padding: 10px;           /* Optional padding around the container */
     }
 
     select {
@@ -831,7 +848,7 @@ select {
     }
     
     /* Button adjustments */
-    .change-team-btn, .delete-user-btn {
+    .change-team-btn, .delete-user-btn, .update-team {
         padding: 8px; /* Increase button padding */
         font-size: 12px; /* Adjust font size */
         display: flex;
@@ -855,6 +872,13 @@ select {
         margin: 5px 0;
     }
 
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1rem;
+    }
 
     nav {
         display: flex;
@@ -952,6 +976,19 @@ select {
         white-space: normal; /* Allow normal text wrapping */
     }
 
+    .profile-container h1 {
+        font-size: 1.5rem;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .profile-container p {
+        font-size: 0.75rem;
+        color: #555; /* Slightly lighter text color */
+        text-align: center; /* Center align */
+    }
+    
     /* Footer adjustments */
     .footer-container {
         flex-direction: column; /* Stack footer items */
@@ -976,7 +1013,7 @@ select {
     }
 
     /* Button adjustments */
-    .change-team-btn, .delete-user-btn {
+    .change-team-btn, .delete-user-btn, .update-team{
         padding: 6px; /* Adjust button padding */
         font-size: 10px; /* Adjust font size */
     }
@@ -999,6 +1036,14 @@ select {
     width: 100%; /* Ensure full width */
     text-align: center; /* Center the logo text */
     margin: 5px 0; /* Small margin around the logo */
+}
+
+h1 {
+    font-size: 1.2rem;
+}
+
+h2 {
+    font-size: 0.75rem;
 }
 
 nav {
@@ -1119,6 +1164,19 @@ nav {
         white-space: normal; /* Allow normal text wrapping */
     }
 
+    .profile-container h1 {
+        font-size: 1.2rem;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .profile-container p {
+        font-size: 0.75rem;
+        color: #555; /* Slightly lighter text color */
+        text-align: center; /* Center align */
+    }
+
     /* Footer adjustments */
     .footer-container {
         flex-direction: column; /* Stack footer content */
@@ -1152,7 +1210,7 @@ nav {
     }
 
     /* Button adjustments */
-    .change-team-btn, .delete-user-btn {
+    .change-team-btn, .delete-user-btn, .update-team {
         padding: 4px; /* Reduce button padding */
         font-size: 5px; /* Reduce font size */
     }
