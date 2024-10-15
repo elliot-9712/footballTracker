@@ -133,6 +133,7 @@ nav a:hover {
     overflow: hidden; /* Prevent scrollbars */
     display: flex; /* Add flexbox for container alignment */
     flex-direction: column; /* Stack items vertically on smaller screens */
+    margin: 1rem;
 }
 
 .text-section {
@@ -145,13 +146,46 @@ nav a:hover {
     height: auto; /* Allow height to adjust */
     text-align: center;
     padding: 20px; /* Add some padding inside the section */
+    background-color: #007bff;
+    color: #ffff;
+    border-radius: 25px;
 }
 
 .map-section {
     margin: 1rem;
-    width: 100%; /* Use full width */
-    max-width: 600px; /* Max width for larger screens */
-    height: auto; /* Allow height to adjust */
+}
+
+iframe {
+    width: 100%;
+    height: auto;
+    max-width: 1000px;
+    aspect-ratio: 4 / 3;
+}
+
+/* About us */
+.about-container {
+    align-items: center;
+    padding: 20px; /* Padding to prevent content from touching the edges */
+    box-sizing: border-box;
+    overflow: hidden; /* Prevent scrollbars */
+    display: flex; /* Flexbox for alignment */
+    flex-direction: column; /* Stack items vertically */
+    margin: 1rem;
+}
+
+.text-section-about {
+    display: flex; /* Use flexbox for alignment */
+    flex-direction: column; /* Align items in a column */
+    justify-content: center; /* Center content vertically */
+    margin: 1rem;
+    width: 100%; /* Full width */
+    max-width: 600px; /* Maximum width on larger screens */
+    height: auto; /* Auto adjust height */
+    text-align: center;
+    padding: 20px; /* Padding inside the section */
+    background-color: #007bff; /* Same blue background color */
+    color: #ffff; /* White text color */
+    border-radius: 25px; /* Rounded corners */
 }
 
 .profile-container {
@@ -896,6 +930,20 @@ select {
         margin-right: 10px; /* Decrease spacing between links */
     }
 
+    /* Home */
+    .featured-matches .match-info{
+        font-size: 12px;
+    }
+
+    .introduction {
+        font-size: 12px;
+    }
+
+    /* contact */
+    iframe {
+        max-width: 100%;
+    }
+
     /* Login container */
     .login-container {
         max-width: 100%; /* Full width for login container */
@@ -1053,6 +1101,29 @@ nav {
     width: 100%; /* Full width */
 }
 
+    /* contact */
+    iframe {
+        max-width: 100%;
+    }
+ /* Home */
+
+.featured-matches .match-info{
+     font-size: 10px;
+}
+    
+.introduction {
+    font-size: 12px;
+}
+
+.hero h1 {
+    font-size: 1.5rem;
+}
+
+.hero p {
+    font-size: 1rem;
+}
+
+
 /* Navigation Links */
 .nav-links {
     display: flex; /* Enable flexbox */
@@ -1105,9 +1176,14 @@ nav {
         font-size: 10px; /* Further reduce font size */
     }
 
-    th, td {
+    td {
         padding: 5px; /* Decrease padding */
-        font-size: 5px; /* Adjust font size */
+        font-size: 8px; /* Adjust font size */
+    }
+
+    th {
+        padding: 5px; /* Decrease padding */
+        font-size: 6px; /* Adjust font size */
     }
 
     .date .pos {
