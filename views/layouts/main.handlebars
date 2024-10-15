@@ -1,64 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <meta charset="UTF-8">  <!-- Set character encoding to UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- Responsive design for mobile devices -->
+    <title>{{title}}</title>  <!-- Title of the page, dynamically set by the template engine -->
+    <link rel="stylesheet" href="/css/style.css">  <!-- Link to the external CSS stylesheet for styling -->
 </head>
 <body>
 
-<header class="header">
+<header class="header">  <!-- Header section of the webpage -->
     <ul>
-        <p id="logo">Premier League Tracker</p>
+        <p id="logo">Premier League Tracker</p>  <!-- Logo for the site -->
     </ul>
     <nav>
-        <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/table">Table</a></li>
-            <li><a href="/schedule">Schedule</a></li>
-            <li><a href="/contact">Contact</a></li>
-            <li><a href="/about">About</a></li>
-            {{#if session.isAdmin}}
-                <li><a href="/users">Users</a></li>
+        <ul class="nav-links">  <!-- Navigation links -->
+            <li><a href="/">Home</a></li>  <!-- Link to the homepage -->
+            <li><a href="/table">Table</a></li>  <!-- Link to the teams table -->
+            <li><a href="/schedule">Schedule</a></li>  <!-- Link to the match schedule -->
+            <li><a href="/contact">Contact</a></li>  <!-- Link to the contact page -->
+            <li><a href="/about">About</a></li>  <!-- Link to the about page -->
+            {{#if session.isAdmin}}  <!-- Check if the user is an admin -->
+                <li><a href="/users">Users</a></li>  <!-- Link to user management for admins -->
             {{/if}}
-            {{#if session.isLoggedIn}}
-                <li><a href="/profile/{{session.name}}">Profile</a></li>
-            {{else}}
-                <li><a href="/login">Login</a></li>
+            {{#if session.isLoggedIn}}  <!-- Check if the user is logged in -->
+                <li><a href="/profile/{{session.name}}">Profile</a></li>  <!-- Link to the user's profile -->
+            {{else}}  <!-- If not logged in -->
+                <li><a href="/login">Login</a></li>  <!-- Link to the login page -->
             {{/if}}
         </ul>
     </nav>
 </header>
 
-
-<div class="content">
-    {{{body}}}
+<div class="content">  <!-- Main content area where specific page content will be rendered -->
+    {{{body}}}  <!-- Rendered content from individual pages will be injected here -->
 </div>
 
-<footer class="footer">
-        <div class="footer-container">
-            <div class="footer-links">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/table">Table</a></li>
-                    <li><a href="/schedule">Schedule</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                    <li><a href="/about">About</a></li>
-                </ul>
-            </div>
-        
-            <div class="footer-social">
-                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
-            </div>
-
-            <div class="footer-copyright">
-                <p>&copy; 2024 Premier League Tracker. All Rights Reserved.</p>
-            </div>
+<footer class="footer">  <!-- Footer section of the webpage -->
+    <div class="footer-container">  <!-- Container for footer content -->
+        <div class="footer-links">  <!-- Section for footer navigation links -->
+            <ul>
+                <li><a href="/">Home</a></li>  <!-- Footer link to the homepage -->
+                <li><a href="/table">Table</a></li>  <!-- Footer link to the teams table -->
+                <li><a href="/schedule">Schedule</a></li>  <!-- Footer link to the match schedule -->
+                <li><a href="/contact">Contact</a></li>  <!-- Footer link to the contact page -->
+                <li><a href="/about">About</a></li>  <!-- Footer link to the about page -->
+            </ul>
         </div>
-    </footer>
+        
+        <div class="footer-social">  <!-- Section for social media links -->
+            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>  <!-- Twitter link -->
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>  <!-- Facebook link -->
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>  <!-- Instagram link -->
+            <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>  <!-- YouTube link -->
+        </div>
+
+        <div class="footer-copyright">  <!-- Section for copyright information -->
+            <p>&copy; 2024 Premier League Tracker. All Rights Reserved.</p>  <!-- Copyright notice -->
+        </div>
+    </div>
+</footer>
 </body>
 </html>

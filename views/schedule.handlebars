@@ -1,111 +1,104 @@
-<div class="table-container">
-    <h1>Schedule</h1>
-    <h2>Matches for Game Week {{selectedGameWeek}}</h2>
-    <div class="schedule-wrapper">
-    <table border="1">
-        <thead>
-                <tr>
-                    <th class="date">Date</th>
-                    <th class="home-team">Home Team</th>
-                    <th class="result">Result</th>
-                    <th class="away-team">Away Team</th>
-                </tr>
-        </thead>
-        <tbody>
-            {{#each matches}}
-                <tr>
-                    <td>{{this.date}}</td>
-                    <td>
-                        <div class="team">
-                            <img src="{{this.home_team_image}}" alt="{{this.home_team_name}}">
-                            <span>{{this.home_team_name}}</span>
-                        </div>
-                    </td>
-                    <td>{{this.home_team_goals}} - {{this.away_team_goals}}</td>
-                    <td>
-                        <div class="team">
-                            <img src="{{this.away_team_image}}" alt="{{this.away_team_name}}">
-                            <span>{{this.away_team_name}}</span>
-                        </div>
-                    </td>
-                </tr>
-            {{/each}}
-        </tbody>
-    </table>
-</div>
-</div>
+    <div class="table-container">
+        <h1>Schedule</h1>
+        <h2>Matches for Game Week {{selectedGameWeek}}</h2>
+        <div class="schedule-wrapper">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th class="date">Date</th>
+                        <th class="home-team">Home Team</th>
+                        <th class="result">Result</th>
+                        <th class="away-team">Away Team</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each matches}}
+                        <tr>
+                            <td>{{this.date}}</td>
+                            <td>
+                                <div class="team">
+                                    <img src="{{this.home_team_image}}" alt="{{this.home_team_name}}">
+                                    <span>{{this.home_team_name}}</span>
+                                </div>
+                            </td>
+                            <td>{{this.home_team_goals}} - {{this.away_team_goals}}</td>
+                            <td>
+                                <div class="team">
+                                    <img src="{{this.away_team_image}}" alt="{{this.away_team_name}}">
+                                    <span>{{this.away_team_name}}</span>
+                                </div>
+                            </td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
 
+    {{!-- Pagination code from "Maketechstuff" - https://www.maketechstuff.com/2023/08/dynamic-pagination-in-javascript-step.html --}}
+    <div class="container">
+        <div class="box">
+            <button type="button" class="prev"><a href="#">Prev</a></button>
 
-{{!-- Pagination code from "Maketechstuff" - https://www.maketechstuff.com/2023/08/dynamic-pagination-in-javascript-step.html --}}
-<div class="container">
-<div class="box">
-    <button type="button" class="prev"><a href="#">Prev</a></button>
+            <ul class="ul">
+                <!-- Pagination numbers will be generated here -->
+            </ul>
 
-    <ul class="ul">
-    </ul>
+            <button type="button" class="next"><a href="#">Next</a></button>
+        </div>
+    </div>
 
-    <button type="button" class="next"><a href="#">Next</a></button>
-</div>
-</div>
+    <script>
+        const selectedGameWeek = {{selectedGameWeek}}; // Get selected game week from server
+        const totalGameWeeks = 38; // Total number of game weeks
 
-<script>
-    const selectedGameWeek = {{selectedGameWeek}}; // Get selected game week from server
-    const totalGameWeeks = 38;
+        let ul = document.querySelector(".ul");
+        let prev = document.querySelector(".prev");
+        let next = document.querySelector(".next");
+        let current_page = selectedGameWeek; // Set current_page to selectedGameWeek
 
-    let ul = document.querySelector(".ul");
-    let prev = document.querySelector(".prev");
-    let next = document.querySelector(".next");
-    let current_page = selectedGameWeek; // Set current_page to selectedGameWeek
+        create_pages(current_page);
 
-    create_pages(current_page);
+        function create_pages(current_page) {
+            ul.innerHTML = ""; // Clear existing pages
 
-    function create_pages(current_page) {
-        ul.innerHTML = "";
+            let before_page = current_page - 2; // Calculate before pages
+            let after_page = current_page + 2; // Calculate after pages
 
-        let before_page = current_page - 2;
-        let after_page = current_page + 2;
+            // Adjust the range for first pages
+            if (current_page == 2) before_page = current_page - 1;
+            if (current_page == 1) before_page = current_page;
 
-        if (current_page == 2) {
-            before_page = current_page - 1;
+            // Adjust the range for last pages
+            if (current_page == totalGameWeeks - 1) after_page = current_page + 1;
+            if (current_page == totalGameWeeks) after_page = current_page;
+
+            // Create pagination buttons for visible game weeks
+            for (let i = before_page; i <= after_page; i++) {
+                if (i < 1 || i > totalGameWeeks) continue; // Skip invalid pages
+                let active_page = current_page == i ? "active_page" : ""; // Highlight active page
+                ul.innerHTML += `<li onclick="navigateToPage(${i})">
+                                    <a href="#" class="page_number ${active_page}">${i}</a>
+                                 </li>`;
+            }
+
+            // Previous and Next Button Functionality
+            prev.onclick = function () {
+                current_page--;
+                navigateToPage(current_page);
+            };
+            next.onclick = function () {
+                current_page++;
+                navigateToPage(current_page);
+            };
+
+            // Display/hide buttons based on current page
+            prev.style.display = current_page <= 1 ? "none" : "block";
+            next.style.display = current_page >= totalGameWeeks ? "none" : "block";
         }
-        if (current_page == 1) {
-            before_page = current_page;
+
+        function navigateToPage(page) {
+            // Redirect to the server with the selected game week
+            window.location.href = `/schedule?game_week=${page}`;
         }
-
-        if (current_page == totalGameWeeks - 1) {
-            after_page = current_page + 1;
-        }
-        if (current_page == totalGameWeeks) {
-            after_page = current_page;
-        }
-
-        // Create pagination buttons for visible game weeks
-        for (let i = before_page; i <= after_page; i++) {
-            let active_page = current_page == i ? "active_page" : "";
-            ul.innerHTML += `<li onclick="navigateToPage(` + i + `)">
-                                <a href="#" class="page_number ` + active_page + `">` + i + `</a>
-                             </li>`;
-        }
-
-// Next and Previous Button Functionality.
-
-        prev.onclick = function () {
-            current_page--;
-            navigateToPage(current_page);
-        };
-        next.onclick = function () {
-            current_page++;
-            navigateToPage(current_page);
-        };
-
-        prev.style.display = current_page <= 1 ? "none" : "block";
-        next.style.display = current_page >= totalGameWeeks ? "none" : "block";
-    }
-
-    function navigateToPage(page) {
-        // Redirect to the server with the selected game week
-        window.location.href = `/schedule?game_week=${page}`;
-    }
-
-
-</script>
+    </script>

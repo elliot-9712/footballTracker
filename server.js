@@ -1,3 +1,6 @@
+// All comments made by ChatGPT
+// https://chatgpt.com/share/670e42ca-a3f0-8010-8b23-4f4c55beb9ad
+
 // Define the admin credentials
 const adminName = 'admin';
 // The password in plaintext is commented out for security purposes

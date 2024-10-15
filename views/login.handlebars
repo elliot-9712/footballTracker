@@ -1,24 +1,28 @@
-    <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css"> <!-- Link to the CSS stylesheet -->
 
 <body>
-    <div class="login-container">
-        <h1>Welcome to Premier League Tracker</h1>
-        <h2>Please log in to continue</h2>
-        <form action="/login" method="POST">
-            <label for="username">Username:</label>
-            <input type="text" name="username" id="username" required>
-            
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" required>
-            
-            <button type="submit">Login</button>
+    <div class="login-container">  <!-- Main container for the login form -->
+        <h1>Welcome to Premier League Tracker</h1>  <!-- Main heading -->
+        <h2>Please log in to continue</h2>  <!-- Subheading prompting login -->
+
+        <form action="/login" method="POST">  <!-- Form for login credentials -->
+            <label for="username">Username:</label>  <!-- Label for username -->
+            <input type="text" name="username" id="username" required>  <!-- Input for username -->
+
+            <label for="password">Password:</label>  <!-- Label for password -->
+            <input type="password" name="password" id="password" required>  <!-- Input for password -->
+
+            <button type="submit">Login</button>  <!-- Submit button for login -->
         </form>
-        {{#if error}}
-            <div class="error">{{error}}</div>
+
+        {{#if error}}  <!-- Conditional rendering for error messages -->
+            <div class="error">{{error}}</div>  <!-- Display error if exists -->
         {{/if}}
-        {{#if message}}
-            <div class="error">{{message}}</div>
+
+        {{#if message}}  <!-- Conditional rendering for other messages -->
+            <div class="error">{{message}}</div>  <!-- Display message if exists -->
         {{/if}}
-        <p>Don't have an account? <a href="/register">Register here</a></p>
+
+        <p>Don't have an account? <a href="/register">Register here</a></p>  <!-- Link to the registration page -->
     </div>
 </body>

@@ -1,44 +1,44 @@
 <div class="table-container">
-    <h1>Table</h1>
-    <div class="table-wrapper">
-        <table>
-            <thead>
-                <tr>
-                    <th class="pos">Pos</th>
-                    <th class="club">Club</th>
-                    <th class="played">Played</th>
-                    <th class="won">Won</th>
-                    <th class="draw">Drawn</th>
-                    <th class="lost">Lost</th>
-                    <th class="auto">GS</th>
-                    <th class="auto">GC</th>
-                    <th class="auto">GD</th>
-                    <th class="points">Points</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each teams}}
-                <tr class="position-{{this.id}}">
-                    <td>{{this.id}}</td>
-                    <td>
-                        <div class="team">
-                            <img src="{{this.image}}" alt="{{this.name}}">
-                            <a class="team-name" href="/teams/{{this.name}}">
-                                <span>{{this.name}}</span>
-                            </a>
-                        </div>
-                    </td>
-                    <td>{{this.games}}</td>
-                    <td>{{this.wins}}</td>
-                    <td>{{this.draws}}</td>
-                    <td>{{this.losses}}</td>
-                    <td class="auto">{{this.goals_scored}}</td>
-                    <td class="auto">{{this.goals_conceded}}</td>
-                    <td class="auto">{{this.goal_difference}}</td>
-                    <td >{{this.points}}</td>
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
+        <h1>Premier League Table</h1>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="pos">Pos</th>
+                        <th class="club">Club</th>
+                        <th class="played">Played</th>
+                        <th class="won">Won</th>
+                        <th class="draw">Drawn</th>
+                        <th class="lost">Lost</th>
+                        <th class="auto">GS</th> <!-- Goals Scored -->
+                        <th class="auto">GC</th> <!-- Goals Conceded -->
+                        <th class="auto">GD</th> <!-- Goal Difference -->
+                        <th class="points">Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each teams}}
+                    <tr class="position-{{this.id}}">
+                        <td>{{this.id}}</td>
+                        <td>
+                            <div class="team">
+                                <img src="{{this.image}}" alt="{{this.name}}">
+                                <a class="team-name" href="/teams/{{this.name}}">
+                                    <span>{{this.name}}</span>
+                                </a>
+                            </div>
+                        </td>
+                        <td>{{this.games}}</td>
+                        <td>{{this.wins}}</td>
+                        <td>{{this.draws}}</td>
+                        <td>{{this.losses}}</td>
+                        <td class="auto">{{this.goals_scored}}</td>
+                        <td class="auto">{{this.goals_conceded}}</td>
+                        <td class="auto">{{this.goal_difference}}</td>
+                        <td>{{this.points}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>

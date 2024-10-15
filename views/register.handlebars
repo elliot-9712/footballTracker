@@ -1,17 +1,19 @@
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css"> <!-- Link to the CSS stylesheet -->
 
+</head>
 <body>
-<div class="login-container">
-    <h1>Welcome to Premier League Tracker</h1>
-    <h2>Please register to continue</h2>
-    <form action="/register" method="POST">
+    <div class="login-container"> <!-- Main container for the registration form -->
+        <h1>Welcome to Premier League Tracker</h1> <!-- Main heading -->
+        <h2>Please register to continue</h2> <!-- Subheading -->
 
-        <label for="username">Username:</label>
-        <input type="text" name="username" placeholder="Username" required>
+        <form action="/register" method="POST"> <!-- Form for user registration -->
+            <label for="username">Username:</label> <!-- Label for the username input -->
+            <input type="text" name="username" placeholder="Username" required> <!-- Username input -->
 
-        <label for="password">Password:</label>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit" value="Register">Register</button>
-    </form>
-</div>
+            <label for="password">Password:</label> <!-- Label for the password input -->
+            <input type="password" name="password" placeholder="Password" required> <!-- Password input -->
+            
+            <button type="submit" value="Register">Register</button> <!-- Submit button -->
+        </form>
+    </div>
 </body>

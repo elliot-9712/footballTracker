@@ -1,43 +1,44 @@
 <body>
-    <div class="profile-container">
-     {{#if session.isAdmin}}
-        <h1>Welcome to the {{user.username}} Profile!</h1>
+    <div class="profile-container"> <!-- Main container for the profile content -->
+        {{#if session.isAdmin}} <!-- Check if the user is an admin -->
+            <h1>Welcome to the {{user.username}} Profile!</h1> <!-- Greeting for admin users -->
 
-                    <div class="button-container">
-            <a href="/users" class="change-team-btn">See all users</a>
-            <a href="/logout" class="delete-user-btn">Logout</a>
-        </div>
-        {{else}}
-        <h1>Welcome to {{user.username}}'s Profile!</h1>
-        <p>{{user.username}}'s favorite team</p>
-        
-        <!-- Display the current team -->
-        <p class="team-container">Team Name: 
-            {{#if user.team_name}}
-                <span>
-                    <img src="{{user.team_image}}" alt="{{user.team_name}}">
-                    <span>{{user.team_name}}</span>
-                </span>
-            {{else}}
-                <span>No team assigned</span>
-            {{/if}}
-        </p>
-        
-        <!-- Team Selection Form -->
-        <form action="/profile/{{user.username}}/update" method="POST" class="team-selection-form">
-            <label for="team">Select a new team:</label>
-            <select name="team" id="team">
-                {{#each teams}}
-                    <option value="{{this.id}}" {{#if (eq this.id ../user.current_team_id)}}selected{{/if}}>{{this.name}}</option>
-                {{/each}}
-            </select>
-            <button type="submit" class="update-team">Update Team</button>
-        </form>
+            <div class="button-container"> <!-- Container for buttons -->
+                <a href="/users" class="change-team-btn">See all users</a> <!-- Link to see all users -->
+                <a href="/logout" class="delete-user-btn">Logout</a> <!-- Link to logout -->
+            </div>
 
-                <div class="button-container">
-            <a href="/" class="change-team-btn">Back to Home</a>
-            <a href="/logout" class="delete-user-btn">Logout</a>
-        </div>
+        {{else}} <!-- Content for regular users -->
+            <h1>Welcome to {{user.username}}'s Profile!</h1> <!-- Greeting for regular users -->
+            <p>{{user.username}}'s favorite team</p> <!-- Display user's favorite team label -->
+
+            <!-- Display the current team -->
+            <p class="team-container">Team Name: 
+                {{#if user.team_name}} <!-- Check if the user has a team assigned -->
+                    <span>
+                        <img src="{{user.team_image}}" alt="{{user.team_name}}"> <!-- Image of the team -->
+                        <span>{{user.team_name}}</span> <!-- Team name -->
+                    </span>
+                {{else}} <!-- If no team assigned -->
+                    <span>No team assigned</span> <!-- Message indicating no team -->
                 {{/if}}
+            </p>
+
+            <!-- Team Selection Form -->
+            <form action="/profile/{{user.username}}/update" method="POST" class="team-selection-form"> <!-- Form to select a new team -->
+                <label for="team">Select a new team:</label> <!-- Label for the team selection -->
+                <select name="team" id="team"> <!-- Dropdown for team selection -->
+                    {{#each teams}} <!-- Loop through available teams -->
+                        <option value="{{this.id}}" {{#if (eq this.id ../user.current_team_id)}}selected{{/if}}>{{this.name}}</option> <!-- Select the current team -->
+                    {{/each}}
+                </select>
+                <button type="submit" class="update-team">Update Team</button> <!-- Button to submit the form -->
+            </form>
+
+            <div class="button-container"> <!-- Container for navigation buttons -->
+                <a href="/" class="change-team-btn">Back to Home</a> <!-- Link to go back to the home page -->
+                <a href="/logout" class="delete-user-btn">Logout</a> <!-- Link to logout -->
+            </div>
+        {{/if}}
     </div>
 </body>
